@@ -36,7 +36,7 @@
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" class="bg-body">
+	<body id="kt_body" class="bg-dark">
 		<!--begin::Main-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Authentication - Sign-up -->
@@ -45,11 +45,11 @@
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
 					<a href="../../demo1/dist/index.html" class="mb-12">
-						<img alt="Logo" src="<?=ROOT?>/assets/media/logos/logo-1.svg" class="h-40px" />
+						<img alt="Logo" src="<?=ROOT?>/assets/media/logos/logo-1-dark.svg" class="h-40px" />
 					</a>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
-					<div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
 						<form method="post" novalidate="novalidate" id="kt_sign_up_form">
 							<!--begin::Heading-->
@@ -80,7 +80,7 @@
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">First Name</label>
 									<input class="form-control form-control-lg form-control-solid <?=!empty($errors['firstname']) ? 'border-danger':'';?>" type="text" placeholder="" value="<?= set_value('firstname')?>" name="firstname" autocomplete="off" required/>
-                                    <?php if(!empty($errors['email'])):?>
+                                    <?php if(!empty($errors['firstname'])):?>
                                         <small class="text-danger"><?=$errors['firstname']?></small>
                                     <?php endif;?>
                                 </div>
@@ -89,7 +89,7 @@
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Last Name</label>
 									<input class="form-control form-control-lg form-control-solid <?=!empty($errors['lastname']) ? 'border-danger':'';?>" type="text" placeholder="" value="<?= set_value('lastname')?>" name="lastname" autocomplete="off" required/>
-                                    <?php if(!empty($errors['email'])):?>
+                                    <?php if(!empty($errors['lastname'])):?>
                                         <small class="text-danger"><?=$errors['lastname']?></small>
                                     <?php endif;?>
                                 </div>
@@ -179,9 +179,9 @@
 				<div class="d-flex flex-center flex-column-auto p-10">
 					<!--begin::Links-->
 					<div class="d-flex align-items-center fw-bold fs-6">
-						<a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
-						<a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-						<a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
+						<a href="<?=ROOT?>" class="text-muted text-hover-primary px-2">About</a>
+						<a href="<?=ROOT?>" class="text-muted text-hover-primary px-2">Contact</a>
+						<a href="<?=ROOT?>" class="text-muted text-hover-primary px-2">Contact Us</a>
 					</div>
 					<!--end::Links-->
 				</div>
@@ -190,7 +190,7 @@
 			<!--end::Authentication - Sign-up-->
 		</div>
 		<!--end::Main-->
-		<script>var hostUrl = "assets/";</script>
+		<script>var hostUrl = "<?=ROOT?>/assets/";</script>
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="<?=ROOT?>/assets/plugins/global/plugins.bundle.js"></script>
