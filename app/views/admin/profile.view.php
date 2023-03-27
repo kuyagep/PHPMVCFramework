@@ -274,22 +274,19 @@ $this->view('admin/admin-header') ?>
                                                     <label for="profileImage"
                                                         class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <div class="d-flex ">
+                                                        <div class="d-flex">
                                                             <img class="rounded-2 js-images-preview"
                                                                 src="<?=ROOT?>/<?=$row->thumbnail?>" alt="Profile"
                                                                 style="width: 150px;max-width: 150px;height: 150px;object-fit: cover;">
                                                             <div class="js-filename m-2">Selected File: None</div>
+
                                                         </div>
                                                         <div class="pt-2">
-                                                            <label href="#" class="btn btn-info btn-sm"
-                                                                title="Upload new profile image">
-                                                                <i class="bi bi-upload text-white"></i>
-                                                                <input onchange="load_image(this.files[0])" type="file"
-                                                                    name="thumbnail" style="display: none;">
+                                                            <label class="btn btn-primary btn-sm" title="Upload new profile image" >
+                                                                <i class="text-white bi bi-upload"></i>
+                                                                <input class="js-profile-image-input" onchange="load_image(this.files[0])" type="file" name="thumbnail" style="display: none;">
                                                             </label>
-                                                            <a href="#" class="btn btn-danger btn-sm"
-                                                                title="Remove my profile image"><i
-                                                                    class="bi bi-trash"></i></a>
+                                                            <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -476,10 +473,20 @@ $this->view('admin/admin-header') ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="text-center">
-                                                    <button type="submit" class="btn btn-info">Save Changes</button>
-                                                    <a href="<?=ROOT?>/admin/profile"><button type="button"
-                                                            class="btn btn-danger mr-5">Back</button></a>
+                                                <div class="col-12 text-center hide">
+                                                    <div class="js-prog progress my-4 ">
+                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button type="submit" onclick="save_profile()" class="btn btn-info">Save Changes</button>
+                                                        <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
+                                                    </div>
+
                                                 </div>
                                             </form><!-- End Profile Edit Form -->
 
@@ -501,8 +508,6 @@ $this->view('admin/admin-header') ?>
                                                                 Changes made to your account
                                                             </label>
                                                         </div>
-
-
 
                                                         <div class="form-check form-check-custom form-check-solid mb-2">
                                                             <input class="form-check-input" type="checkbox"
@@ -663,10 +668,59 @@ $this->view('admin/admin-header') ?>
 
         show_tab(tab);
     }
-function load_image(file) {
-    document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
-    document.querySelector(".js-images-preview").src = window.URL.createObjectURL(file);
-}
+    function load_image(file) {
+        document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
+        document.querySelector(".js-images-preview").src = window.URL.createObjectURL(file);
+    }
 
+    //upload functions
+    function save_profile()
+    {
+        var image = document.querySelector(".js-profile-image-input");
+        send_data({
+            pic: image.files[0]
+        });
+    }
+
+    function send_data(obj)
+    {
+
+        var prog = document.querySelector(".js-prog");
+        prog.children[0].style.width = "0%";
+        prog.classList.remove("hide");
+
+        var myform = new FormData();
+        for(key in obj){
+            myform.append(key,obj[key]);
+        }
+
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState == 4){
+
+                if(ajax.status == 200){
+                    //everything went well
+                    // alert("upload complete");
+                }else{
+                    //error
+                    alert("an error occurred");
+                }
+            }
+        });
+
+        ajax.upload.addEventListener('progress',function(e){
+
+            var percent = Math.round((e.loaded / e.total) * 100);
+            prog.children[0].style.width = percent + "%";
+            prog.children[0].innerHTML = "Saving.. " + percent + "%";
+
+        });
+
+        ajax.open('post','',true);
+        ajax.send(myform);
+
+    }
 </script>
 <?php $this->view('admin/admin-footer') ?>

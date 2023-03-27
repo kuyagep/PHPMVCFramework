@@ -43,7 +43,9 @@ class Admin
 
                             $destination = $folder.time().$_FILES['thumbnail']['name'];
                             move_uploaded_file($_FILES['thumbnail']['tmp_name'], $destination);
-
+//                            Resize Images
+                            resize_image($destination);
+//                            move file to destination
                             $_POST['thumbnail'] = $destination;
                             if(file_exists($row->thumbnail)){
                                 unlink($row->thumbnail);

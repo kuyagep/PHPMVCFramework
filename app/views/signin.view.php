@@ -80,6 +80,7 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Input-->
 								<input value="<?=set_value('email')?>" class="form-control form-control-lg form-control-solid" type="text" name="email"  autocomplete="off" />
 								<!--end::Input-->
+
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -90,15 +91,28 @@ License: For each use you must have a valid license purchased only from above li
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
 									<!--end::Label-->
 									<!--begin::Link-->
-									<a href="../../demo1/dist/authentication/flows/dark/password-reset.html" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+
 									<!--end::Link-->
 								</div>
 								<!--end::Wrapper-->
 								<!--begin::Input-->
 								<input value="<?=set_value('password')?>" class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
 								<!--end::Input-->
+
+                                <div class="row">
+                                    <div class="col-6 mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-2 float-right text-lg-end">
+                                        <a href="../../demo1/dist/authentication/flows/dark/password-reset.html" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+                                    </div>
+                                </div>
 							</div>
 							<!--end::Input group-->
+
 							<!--begin::Actions-->
 							<div class="text-center">
 								<!--begin::Submit button-->
@@ -156,6 +170,22 @@ License: For each use you must have a valid license purchased only from above li
 <!--		<script src="--><?//= ROOT?><!--/assets/js/custom/authentication/sign-in/general.js"></script> -->
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
+<!--    loading    -->
+    <script>
+        // Element to indecate
+        var button = document.querySelector("#kt_sign_in_submit");
+
+        // Handle button click event
+        button.addEventListener("click", function() {
+            // Activate indicator
+            button.setAttribute("data-kt-indicator", "on");
+
+            // Disable indicator after 3 seconds
+            setTimeout(function() {
+                button.removeAttribute("data-kt-indicator");
+            }, 3000);
+        });
+    </script>
 	</body>
 	<!--end::Body-->
 </html>

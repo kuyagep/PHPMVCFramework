@@ -40,9 +40,10 @@ Trait Model
 		$data = array_merge($data, $data_not);
 		
 		$result = $this->query($query, $data);
-		if($result)
-			return $result[0];
 
+		if(is_array($result)) {
+            return $result[0];
+        }
 		return false;
 	}
     //Insert Query
@@ -109,7 +110,6 @@ Trait Model
 		$this->query($query, $data);
 
 		return false;
-
 	}
 
     /**

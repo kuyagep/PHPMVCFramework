@@ -34,7 +34,7 @@ class User
 
 	public function validate($data)
     {
-        $data = $this->getData($data);
+        $data = $this->getData($data, $id=null);
 
 
         if(empty($data['password']))
