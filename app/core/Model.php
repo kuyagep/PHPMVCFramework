@@ -68,7 +68,7 @@ Trait Model
 		return false;
 	}
     //Update Query
-	public function update($id, $data, $id_column = 'id'): bool
+	public function update($id, $data, $id_column = 'id')
     {
 
 		/** remove unwanted data **/
@@ -117,7 +117,7 @@ Trait Model
      * @param $data_not
      * @return string
      */
-    public function getStr($data, $data_not): string
+    public function getStr($data, $data_not)
     {
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);

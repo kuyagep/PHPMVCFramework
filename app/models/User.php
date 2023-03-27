@@ -34,30 +34,8 @@ class User
 
 	public function validate($data)
     {
-		$this->errors = [];
-        if(empty($data['firstname']))
-        {
-            $this->errors['firstname'] = "A first name is required";
-        }elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['firstname']))) {
-            $this->errors['firstname'] = "Firstname can only have letters";
-        }
+        $data = $this->getData($data);
 
-        if(empty($data['lastname']))
-        {
-            $this->errors['lastname'] = "A last name is required";
-        }elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['lastname']))) {
-            $this->errors['lastname'] = "Lastname can only have letters";
-        }
-
-        //check email
-        if(!filter_var($data['email'],FILTER_VALIDATE_EMAIL))
-        {
-            $this->errors['email'] = "Email is not valid";
-        }else
-            if($this->where(['email'=>$data['email']]))
-            {
-                $this->errors['email'] = "That email already exists";
-            }
 
         if(empty($data['password']))
         {
@@ -84,36 +62,13 @@ class User
 	}
 
     //Edit Validation
-	public function edit_validate($data)
+	public function edit_validate($data,$id)
     {
-		$this->errors = [];
-        if(empty($data['firstname']))
-        {
-            $this->errors['firstname'] = "A first name is required";
-        }elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['firstname']))) {
-            $this->errors['firstname'] = "Firstname can only have letters";
-        }
+        $data = $this->getData($data, $id);
 
-        if(empty($data['lastname']))
+        if(!empty($data['phone']))
         {
-            $this->errors['lastname'] = "A last name is required";
-        }elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['lastname']))) {
-            $this->errors['lastname'] = "Lastname can only have letters";
-        }
-
-        //check email
-        if(!filter_var($data['email'],FILTER_VALIDATE_EMAIL))
-        {
-            $this->errors['email'] = "Email is not valid";
-        }else
-            if($this->where(['email'=>$data['email']]))
-            {
-                $this->errors['email'] = "That email already exists";
-            }
-
-        if(!preg_match("/^(09|\+6309)[0-9]{9}$/", trim($data['phone'])))
-        {
-            if(!filter_var($data['phone'],FILTER_VALIDATE_URL)){
+            if(!preg_match("/^(09|\+639)[0-9]{9}$/", trim($data['phone']))){
                 $this->errors['phone'] = "Phone number is not valid";
             }
         }
@@ -144,22 +99,6 @@ class User
             }
         }
 
-        // if(empty($data['password']))
-        // {
-        //     $this->errors['password'] = "A password is required";
-        // }
-
-        // if($data['password'] !== $data['retype_password'])
-        // {
-        //     $this->errors['password'] = "Passwords do not match";
-        // }
-
-        // if(empty($data['terms']))
-        // {
-        //     $this->errors['terms'] = "Please accept the terms and conditions";
-        // }
-
-        
         if(empty($this->errors))
         {
             return true;
@@ -167,5 +106,40 @@ class User
 
         return false;
 	}
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function getData($data, $id)
+    {
+        $this->errors = [];
+        if (empty($data['firstname'])) {
+            $this->errors['firstname'] = "A first name is required";
+        } elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['firstname']))) {
+            $this->errors['firstname'] = "Firstname can only have letters";
+        }
+
+        if (empty($data['lastname'])) {
+            $this->errors['lastname'] = "A last name is required";
+        } elseif (!preg_match("/^[a-zA-Z ]+$/", trim($data['lastname']))) {
+            $this->errors['lastname'] = "Lastname can only have letters";
+        }
+
+        //check email
+        if(!filter_var($data['email'],FILTER_VALIDATE_EMAIL))
+        {
+            $this->errors['email'] = "Email is not valid";
+        }elseif($results = $this->where(['email'=>$data['email']]))
+        {
+            foreach($results as $result){
+                if ($id != $result->id){
+                    $this->errors['email'] = "That email already exists.";
+                }
+            }
+
+        }
+        return $data;
+    }
 
 }

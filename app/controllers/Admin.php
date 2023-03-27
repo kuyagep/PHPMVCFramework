@@ -32,7 +32,7 @@ class Admin
                 file_put_contents($folder."index.php", "Access Denied!");
                 file_put_contents("uploads/index.php", "Access Denied!");
             }
-            if ($user->edit_validate($_POST)) {
+            if ($user->edit_validate($_POST, $id)) {
                 # code...
             
                 $allowed = ['image/jpeg','image/png'];
@@ -56,6 +56,7 @@ class Admin
                     }
                 };
                 $user->update($id,$_POST);
+                message("Profile save successfully!");
                 redirect('admin/profile/'.$id);
             }
         }

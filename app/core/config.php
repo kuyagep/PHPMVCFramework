@@ -1,9 +1,9 @@
 <?php
 
-const APP_NAME = "REDCODE";
-const APP_DESC = "Sample Description";
-const APP_KEYWORD = "Sample Keyword";
-const APP_URL = "https://sample.com";
+const APP_NAME = "FRAMEWORK";
+const APP_DESC = "A PHP framework is built on the open-source language PHP and offers built-in features to improve your software development lifecycle";
+const APP_KEYWORD = "A PHP framework is built on the open-source language PHP and offers built-in features to improve your software development lifecycle";
+const APP_URL = "https://kuyagep.github.io";
 
 /** true means show errors **/
 const DEBUG = true;

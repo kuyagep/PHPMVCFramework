@@ -68,6 +68,7 @@ License: For each use you must have a valid license purchased only from above li
                             <?php if(message()):?>
                                 <div class="alert alert-success text-center"><?=message('',true)?></div>
                             <?php endif;?>
+
                             <?php if(!empty($errors['email'])):?>
                                 <div class="alert alert-danger text-center"><?=$errors['email']?></div>
                             <?php endif;?>

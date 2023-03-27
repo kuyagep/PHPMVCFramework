@@ -1,4 +1,5 @@
-<?php $this->view('admin/admin-header') ?>
+<?php
+$this->view('admin/admin-header') ?>
 <!--begin::Content-->
 <?php if(!empty($row)):?>
 
@@ -74,15 +75,17 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <div>
-                                    <select class="form-select form-select-solid" data-kt-select2="true"
-                                        data-placeholder="Select option" data-dropdown-parent="#kt_menu_61484bfe0699c"
-                                        data-allow-clear="true">
-                                        <option></option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Pending</option>
-                                        <option value="2">In Process</option>
-                                        <option value="2">Rejected</option>
-                                    </select>
+                                    <label>
+                                        <select class="form-select form-select-solid" data-kt-select2="true"
+                                            data-placeholder="Select option" data-dropdown-parent="#kt_menu_61484bfe0699c"
+                                            data-allow-clear="true">
+                                            <option></option>
+                                            <option value="1">Approved</option>
+                                            <option value="2">Pending</option>
+                                            <option value="2">In Process</option>
+                                            <option value="2">Rejected</option>
+                                        </select>
+                                    </label>
                                 </div>
                                 <!--end::Input-->
                             </div>
@@ -141,8 +144,7 @@
                 <!--end::Wrapper-->
                 <!--begin::Button-->
                 <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#kt_modal_create_apid=" profile-overview-tab"p"
-                    id="kt_toolbar_primary_button">Create</a>
+                    data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -155,7 +157,23 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <main id="main" class="main">
+                <?php if(message()):?>
 
+                    <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen048.svg-->
+                        <span class="svg-icon svg-icon-2hx svg-icon-success me-4">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black"></path>
+															<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="black"></path>
+														</svg>
+													</span>
+                        <!--end::Svg Icon-->
+                        <div class="d-flex flex-column">
+                            <h4 class="mb-1 text-success">Success</h4>
+                            <span><?=message('',true)?></span>
+                        </div>
+                    </div>
+                <?php endif;?>
                 <section class="section profile">
                     <div class="row">
                         <div class="col-xl-4">
@@ -168,10 +186,10 @@
                                     <h2><?=ucfirst(esc($row->firstname))?> <?=ucfirst(esc($row->lastname))?></h2>
                                     <h3 class="text-muted"><?=ucfirst(esc($row->role))?></h3>
                                     <div class="social-links mt-2">
-                                        <a href="#" class="twitter"><i class="bi bi-twitter px-3"></i></a>
-                                        <a href="#" class="facebook"><i class="bi bi-facebook px-3"></i></a>
-                                        <a href="#" class="instagram"><i class="bi bi-instagram px-3"></i></a>
-                                        <a href="#" class="linkedin"><i class="bi bi-linkedin px-3"></i></a>
+                                        <a href="<?=esc($row->twitter_link)?>" class="twitter"><i class="bi bi-twitter px-3"></i></a>
+                                        <a href="<?=esc($row->facebook_link)?>" class="facebook"><i class="bi bi-facebook px-3"></i></a>
+                                        <a href="<?=esc($row->instagram_link)?>" class="instagram"><i class="bi bi-instagram px-3"></i></a>
+                                        <a href="<?=esc($row->linkedin_link)?>" class="linkedin"><i class="bi bi-linkedin px-3"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -184,31 +202,21 @@
                                 <div class="card-body pt-3">
                                     <!-- Bordered Tabs -->
                                     <ul class="nav nav-tabs nav-tabs-bordered">
-
+                                <!--             tab_list       -->
                                         <li class="nav-item">
-                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))"
-                                                class="nav-link active" data-bs-toggle="tab"
-                                                data-bs-target="#profile-overview"
-                                                id="profile-overview-tab">Overview</button>
+                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>
                                         </li>
 
                                         <li class="nav-item">
-                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))"
-                                                class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit"
-                                                id="profile-edit-tab">Edit Profile</button>
+                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" id="profile-edit-tab">Edit Profile</button>
                                         </li>
 
                                         <li class="nav-item">
-                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))"
-                                                class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings"
-                                                id="profile-setting-tab">Settings</button>
+                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings" id="profile-settings-tab">Settings</button>
                                         </li>
 
                                         <li class="nav-item">
-                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))"
-                                                class="nav-link" data-bs-toggle="tab"
-                                                data-bs-target="#profile-change-password" id="profile-change-tab">Change
-                                                Password</button>
+                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" id="profile-change-password-tab">Change Password</button>
                                         </li>
 
                                     </ul>
@@ -405,8 +413,11 @@
                                                         <input name="email" type="email"
                                                             class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>"
                                                             id="email" value="<?=set_value('email', esc($row->email))?>">
-
+                                                        <?php if(!empty($errors['email'])):?>
+                                                            <small class="text-danger"><?=$errors['email']?></small>
+                                                        <?php endif;?>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="row mb-3">
@@ -453,12 +464,11 @@
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="linkedin"
+                                                    <label for="linkedin_link"
                                                         class="col-md-4 col-lg-3 col-form-label">Linkedin
                                                         Profile</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <input name="linkedin_link" type="text"
-                                                            class="form-control <?=!empty($errors['linkedin_link']) ? 'border-danger':'';?>"
+                                                        <input name="linkedin_link" type="text" class="form-control <?=!empty($errors['linkedin_link']) ? 'border-danger':'';?>"
                                                             id="linkedin_link" value="<?=set_value('linkedin_link', esc($row->linkedin_link))?>"    >
                                                         <?php if(!empty($errors['linkedin_link'])):?>
                                                         <small class="text-danger"><?=$errors['linkedin_link']?></small>
@@ -632,27 +642,31 @@
 <?php endif;?>
 
 <script>
-var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
+    let tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
 
+    function show_tab(tab_name)
+    {
+        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
+        const tab = new bootstrap.Tab(someTabTriggerEl);
 
-function show_tab(tab_name) {
-    const someTabTriggerE1 = document.querySelect(tab_name +"-tab");
-    const tab = new bootstrap.Tab(someTabTriggerE1);
-    tab.show();
-}
+        tab.show();
 
-function set_tab(tab_name) {
-    tab = tab_name;
-    sessionStorage.setItem("tab", tab_name);
-}
+    }
 
+    function set_tab(tab_name)
+    {
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+    }
+
+    window.onload = function(){
+
+        show_tab(tab);
+    }
 function load_image(file) {
     document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
-    var mylink = window.URL.createObjectURL(file);
-    document.querySelector(".js-images-preview").src = mylink;
+    document.querySelector(".js-images-preview").src = window.URL.createObjectURL(file);
 }
-window.onload = function() {
-    show_tab(tab);
-}
+
 </script>
 <?php $this->view('admin/admin-footer') ?>
