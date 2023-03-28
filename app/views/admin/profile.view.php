@@ -469,18 +469,15 @@ $this->view('admin/admin-header') ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 text-center ">
-                                                    <div class="js-progress progress my-4 hide">
-                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving.. 0%</div>
-                                                    </div>
+                                                <div class="js-prog progress my-4 ">
+                                                  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
                                                 </div>
 
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <button type="button"  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
-                                                        <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
-                                                    </div>
-
+                                                <div class="text-center">
+                                                  <a href="<?=ROOT?>/admin/profile">
+                                                    <button type="button" class="btn btn-primary">Back</button>
+                                                  </a>
+                                                  <button type="button" onclick="save_profile()"  class="btn btn-danger">Save Changes</button>
                                                 </div>
                                             </form><!-- End Profile Edit Form -->
 
@@ -586,7 +583,7 @@ $this->view('admin/admin-header') ?>
             </main><!-- End #main -->
         </div>
         <!--end::Container-->
-    </div>
+    </div>  
     <!--end::Post-->
 </div>
 <!--end::Content-->
@@ -654,84 +651,89 @@ $this->view('admin/admin-header') ?>
 
     }
 
-    function set_tab(tab_name)
-    {
-        tab = tab_name;
-        sessionStorage.setItem("tab", tab_name);
-    }
-
-    function load_image(file)
-    {
-
-        document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
-
-        var mylink = window.URL.createObjectURL(file);
-        document.querySelector(".js-image-preview").src = mylink;
-    }
-
-    window.onload = function(){
-
-        show_tab(tab);
-    }
-
     //upload functions
-    function save_profile()
-    {
-        var image = document.querySelector(".js-profile-image-input");
-        var allowed = ['jpg','jpeg','png'];
+  function save_profile(e)
+  {
 
-        if(typeof image.files[0] === 'object'){
-            var ext = image.file[0].name.split(".").pop();
+    var form = e.currentTarget.form;
+    var inputs = form.querySelectorAll("input,textarea");
+    var obj = {};
+    var image_added = false;
+
+    for (var i = 0; i < inputs.length; i++) {
+      var key = inputs[i].name;
+
+      if(key == 'image'){
+        if(typeof inputs[i].files[0] == 'object'){
+          obj[key] = inputs[i].files[0];
+          image_added = true;
         }
-
-        if (allowed.includes(ext.toLowerCase())){
-
-        }
-
-        send_data({
-            pic: image.files[0]
-        });
+      }else{
+        obj[key] = inputs[i].value;
+      }
     }
+ 
+    //validate image
+    if(image_added){
+
+      var allowed = ['jpg','jpeg','png'];
+      if(typeof obj.image == 'object'){
+        var ext = obj.image.name.split(".").pop();
+      }
+
+      if(!allowed.includes(ext.toLowerCase())){
+        alert("Only these file types are allowed in profile image: "+ allowed.toString(","));
+        return;
+      }
+    }
+
+    send_data(obj);
+
+  }
 
     function send_data(obj)
-    {
+  {
 
-        var prog = document.querySelector(".js-prog");
-        prog.children[0].style.width = "0%";
-        prog.classList.remove("hide");
+    var prog = document.querySelector("."+progbar);
+    prog.children[0].style.width = "0%";
+    prog.classList.remove("hide");
 
-        var myform = new FormData();
-        for(key in obj){
-            myform.append(key,obj[key]);
-        }
-
-        var ajax = new XMLHttpRequest();
-
-        ajax.addEventListener('readystatechange',function(){
-
-            if(ajax.readyState == 4){
-
-                if(ajax.status == 200){
-                    //everything went well
-                    alert("upload complete");
-                }else{
-                    //error
-                    alert("an error occurred");
-                }
-            }
-        });
-
-        ajax.upload.addEventListener('progress',function(e){
-
-            var percent = Math.round((e.loaded / e.total) * 100);
-            prog.children[0].style.width = percent + "%";
-            prog.children[0].innerHTML = "Saving.. " + percent + "%";
-
-        });
-
-        ajax.open('post','',true);
-        ajax.send(myform);
-
+    var myform = new FormData();
+    for(key in obj){
+      myform.append(key,obj[key]); 
     }
+
+    var ajax = new XMLHttpRequest();
+
+    ajax.addEventListener('readystatechange',function(){
+
+      if(ajax.readyState == 4){
+
+        if(ajax.status == 200){
+          //everything went well
+          //alert("upload complete");
+          //window.location.reload();
+          handle_result(ajax.responseText);
+        }else{
+          //error
+          alert("an error occurred");
+        }
+      }
+    });
+
+    ajax.upload.addEventListener('progress',function(e){
+
+      var percent = Math.round((e.loaded / e.total) * 100);
+      prog.children[0].style.width = percent + "%";
+      prog.children[0].innerHTML = "Saving.. " + percent + "%";
+
+    });
+
+    ajax.open('post','',true);
+    ajax.send(myform);
+
+  }
+
+
 </script>
 <?php $this->view('admin/admin-footer') ?>
