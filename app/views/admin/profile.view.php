@@ -477,7 +477,7 @@ $this->view('admin/admin-header') ?>
                                                   <a href="<?=ROOT?>/admin/profile">
                                                     <button type="button" class="btn btn-primary">Back</button>
                                                   </a>
-                                                  <button type="button" onclick="save_profile()"  class="btn btn-danger">Save Changes</button>
+                                                  <button type="button" onclick="save_profile(event)" type="submit"  class="btn btn-danger">Save Changes</button>
                                                 </div>
                                             </form><!-- End Profile Edit Form -->
 
@@ -672,10 +672,10 @@ $this->view('admin/admin-header') ?>
     }
 
     //upload functions
-  function save_profile(e)
+  function save_profile(event)
   {
 
-    var form = e.currentTarget.form;
+    var form = event.currentTarget.form;
     var inputs = form.querySelectorAll("input,textarea");
     var obj = {};
     var image_added = false;
@@ -714,7 +714,7 @@ $this->view('admin/admin-header') ?>
     function send_data(obj)
   {
 
-    var prog = document.querySelector("."+progbar);
+    var prog = document.querySelector(".js-prog");
     prog.children[0].style.width = "0%";
     prog.classList.remove("hide");
 
@@ -731,7 +731,7 @@ $this->view('admin/admin-header') ?>
 
         if(ajax.status == 200){
           //everything went well
-          //alert("upload complete");
+          alert("upload complete");
           //window.location.reload();
           handle_result(ajax.responseText);
         }else{
