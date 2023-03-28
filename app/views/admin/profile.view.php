@@ -469,8 +469,8 @@ $this->view('admin/admin-header') ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="js-prog progress my-4 ">
-                                                  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
+                                                <div class="js-prog progress my-4 hide">
+                                                  <div class="progress-bar " role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
                                                 </div>
 
                                                 <div class="text-center">
@@ -649,6 +649,26 @@ $this->view('admin/admin-header') ?>
 
         tab.show();
 
+    }
+
+    function set_tab(tab_name)
+    {
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+    }
+
+    function load_image(file)
+    {
+
+        document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
+
+        var mylink = window.URL.createObjectURL(file);
+        document.querySelector(".js-image-preview").src = mylink;
+    }
+
+    window.onload = function(){
+
+        show_tab(tab);
     }
 
     //upload functions
