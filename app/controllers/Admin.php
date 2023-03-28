@@ -19,11 +19,17 @@ class Admin
 
     public function profile($id = null)
     {
+        if(!Auth::logged_in())
+        {
+            message('Please login to view the admin section');
+            redirect('signin');
+        }
+
         $id = $id ?? Auth::getId();
         $user = new User();
         $data['row'] = $row = $user->first(['id'=>$id]);
 
-        if($_SERVER['REQUEST_METHOD'] == "POST" && $row)
+        if($_SERVER['REQUEST_METHOD'] === "POST" && $row )
         {
 
             $folder = "uploads/images/";
@@ -34,8 +40,9 @@ class Admin
             }
             if ($user->edit_validate($_POST, $id)) {
                 # code...
-            
+
                 $allowed = ['image/jpeg','image/png'];
+
                 if(!empty($_FILES['thumbnail']['name'])){
                     if ($_FILES['thumbnail']['error']==0 ){
                         if (in_array($_FILES['thumbnail']['type'], $allowed)){
@@ -56,8 +63,9 @@ class Admin
                     }else{
                         $user->errors['thumbnail'] = "Could not upload image";
                     }
-                };
+                }
                 $user->update($id,$_POST);
+
                 message("Profile save successfully!");
                 redirect('admin/profile/'.$id);
             }

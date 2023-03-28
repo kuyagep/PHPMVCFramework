@@ -275,7 +275,7 @@ $this->view('admin/admin-header') ?>
                                                         class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                                     <div class="col-md-8 col-lg-9">
                                                         <div class="d-flex">
-                                                            <img class="rounded-2 js-images-preview"
+                                                            <img class="rounded-2 js-image-preview"
                                                                 src="<?=ROOT?>/<?=$row->thumbnail?>" alt="Profile"
                                                                 style="width: 150px;max-width: 150px;height: 150px;object-fit: cover;">
                                                             <div class="js-filename m-2">Selected File: None</div>
@@ -298,7 +298,7 @@ $this->view('admin/admin-header') ?>
                                                         <input name="firstname" type="text"
                                                             class="form-control <?=!empty($errors['firstname']) ? 'border-danger':'';?>"
                                                             id="firstname"
-                                                            value="<?=set_value('firstname', esc($row->firstname))?>">
+                                                            value="<?=set_value('firstname', esc($row->firstname))?>" required>
                                                         <?php if(!empty($errors['firstname'])):?>
                                                         <small class="text-danger"><?=$errors['firstname']?></small>
                                                         <?php endif;?>
@@ -312,7 +312,7 @@ $this->view('admin/admin-header') ?>
                                                         <input name="lastname" type="text"
                                                             class="form-control <?=!empty($errors['lastname']) ? 'border-danger':'';?>"
                                                             id="lastname"
-                                                            value="<?=set_value('lastname', esc($row->lastname))?>">
+                                                            value="<?=set_value('lastname', esc($row->lastname))?>" required>
                                                         <?php if(!empty($errors['lastname'])):?>
                                                         <small class="text-danger"><?=$errors['lastname']?></small>
                                                         <?php endif;?>
@@ -409,7 +409,7 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="email" type="email"
                                                             class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>"
-                                                            id="email" value="<?=set_value('email', esc($row->email))?>">
+                                                            id="email" value="<?=set_value('email', esc($row->email))?>" required>
                                                         <?php if(!empty($errors['email'])):?>
                                                             <small class="text-danger"><?=$errors['email']?></small>
                                                         <?php endif;?>
@@ -423,7 +423,7 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="twitter_link" type="text"
                                                             class="form-control <?=!empty($errors['twitter_link']) ? 'border-danger':'';?>"
-                                                            id="" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
+                                                            id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
                                                         <?php if(!empty($errors['twitter_link'])):?>
                                                         <small class="text-danger"><?=$errors['twitter_link']?></small>
                                                         <?php endif;?>
@@ -438,7 +438,7 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="facebook_link" type="text"
                                                             class="form-control <?=!empty($errors['facebook_link']) ? 'border-danger':'';?>"
-                                                            id="" value="<?=set_value('facebook_link', $row->facebook_link)?>">
+                                                            id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>">
                                                         <?php if(!empty($errors['facebook_link'])):?>
                                                         <small
                                                             class="text-danger"><?=$errors['facebook_link']?></small>
@@ -473,17 +473,15 @@ $this->view('admin/admin-header') ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 text-center hide">
-                                                    <div class="js-prog progress my-4 ">
-                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
+                                                <div class="col-12 text-center ">
+                                                    <div class="js-progress progress my-4 hide">
+                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving.. 0%</div>
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <button type="submit" onclick="save_profile()" class="btn btn-info">Save Changes</button>
+                                                        <button  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
                                                         <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
                                                     </div>
 
@@ -647,7 +645,9 @@ $this->view('admin/admin-header') ?>
 <?php endif;?>
 
 <script>
-    let tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
+
+
+    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#profile-overview";
 
     function show_tab(tab_name)
     {
@@ -664,13 +664,18 @@ $this->view('admin/admin-header') ?>
         sessionStorage.setItem("tab", tab_name);
     }
 
+    function load_image(file)
+    {
+
+        document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
+
+        var mylink = window.URL.createObjectURL(file);
+        document.querySelector(".js-image-preview").src = mylink;
+    }
+
     window.onload = function(){
 
         show_tab(tab);
-    }
-    function load_image(file) {
-        document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
-        document.querySelector(".js-images-preview").src = window.URL.createObjectURL(file);
     }
 
     //upload functions
@@ -702,7 +707,7 @@ $this->view('admin/admin-header') ?>
 
                 if(ajax.status == 200){
                     //everything went well
-                    // alert("upload complete");
+                    alert("upload complete");
                 }else{
                     //error
                     alert("an error occurred");

@@ -85,7 +85,7 @@ function resize_image($filename,$max_size = 700)
                 break;
 
             default:
-                $image = imagecreatefromjpeg($filename);
+                $image = imagecreatefromjpeg($filename);  //if mag error ni goto sa php.ini find ;extension=gd and remove semicolon
                 break;
         }
 
