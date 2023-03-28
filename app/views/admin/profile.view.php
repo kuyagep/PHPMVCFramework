@@ -418,32 +418,28 @@ $this->view('admin/admin-header') ?>
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="twitter_link"
-                                                        class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+                                                    <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <input name="twitter_link" type="text"
-                                                            class="form-control <?=!empty($errors['twitter_link']) ? 'border-danger':'';?>"
-                                                            id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
-                                                        <?php if(!empty($errors['twitter_link'])):?>
-                                                        <small class="text-danger"><?=$errors['twitter_link']?></small>
-                                                        <?php endif;?>
+                                                        <input name="twitter_link" type="text" class="form-control" id="Twitter" value="<?=set_value('twitter_link',$row->twitter_link)?>">
                                                     </div>
+
+                                                    <?php if(!empty($errors['twitter_link'])):?>
+                                                        <small class="text-danger"><?=$errors['twitter_link']?></small>
+                                                    <?php endif;?>
+
                                                 </div>
 
-                                                
+
                                                 <div class="row mb-3">
-                                                    <label for="facebook_link"
-                                                        class="col-md-4 col-lg-3 col-form-label">Facebook
-                                                        Profile</label>
+                                                    <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <input name="facebook_link" type="text"
-                                                            class="form-control <?=!empty($errors['facebook_link']) ? 'border-danger':'';?>"
-                                                            id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>">
-                                                        <?php if(!empty($errors['facebook_link'])):?>
-                                                        <small
-                                                            class="text-danger"><?=$errors['facebook_link']?></small>
-                                                        <?php endif;?>
+                                                        <input name="facebook_link" type="text" class="form-control" id="Facebook" value="<?=set_value('facebook_link',$row->facebook_link)?>">
                                                     </div>
+
+                                                    <?php if(!empty($errors['facebook_link'])):?>
+                                                        <small class="text-danger"><?=$errors['facebook_link']?></small>
+                                                    <?php endif;?>
+
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="instagram_link"
