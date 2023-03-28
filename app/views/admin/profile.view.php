@@ -477,7 +477,7 @@ $this->view('admin/admin-header') ?>
 
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <button  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
+                                                        <button type="button"  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
                                                         <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
                                                     </div>
 
@@ -678,6 +678,16 @@ $this->view('admin/admin-header') ?>
     function save_profile()
     {
         var image = document.querySelector(".js-profile-image-input");
+        var allowed = ['jpg','jpeg','png'];
+
+        if(typeof image.files[0] === 'object'){
+            var ext = image.file[0].name.split(".").pop();
+        }
+
+        if (allowed.includes(ext.toLowerCase())){
+
+        }
+
         send_data({
             pic: image.files[0]
         });
