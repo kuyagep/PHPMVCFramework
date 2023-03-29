@@ -99,7 +99,7 @@
             <?php else:?>
                 <!--begin::Toolbar-->
                 <div class="flex-equal text-end ms-1">
-                    <a href="<?=ROOT?>/logout" class="btn btn-primary">Logout</a>
+                    <a href="<?=ROOT?>/logout" class="btn btn-danger">Logout</a>
                 </div>
                 <!--end::Toolbar-->
             <?php endif;?>

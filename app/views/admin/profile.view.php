@@ -703,9 +703,9 @@ $this->view('admin/admin-header') ?>
 
         ajax.addEventListener('readystatechange',function(){
 
-            if(ajax.readyState == 4){
+            if(ajax.readyState === 4){
 
-                if(ajax.status == 200){
+                if(ajax.status === 200){
                     //everything went well
                     //alert("upload complete");
                 }else{

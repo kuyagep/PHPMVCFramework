@@ -1100,7 +1100,7 @@ License: For each use you must have a valid license purchased only from above li
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-50px me-5">
                                                         <img alt="Logo"
-                                                            src="<?=ROOT?>/<?=Auth::getThumbnail()?>" />
+                                                             src="<?=ROOT?>/<?=Auth::getThumbnail()?>" />
                                                     </div>
                                                     <!--end::Avatar-->
                                                     <!--begin::Username-->
