@@ -729,5 +729,4 @@ $this->view('admin/admin-header') ?>
     }
 </script>
 
-<p>Hello World</p>
 <?php $this->view('admin/admin-footer') ?>
