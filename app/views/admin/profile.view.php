@@ -418,28 +418,32 @@ $this->view('admin/admin-header') ?>
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+                                                    <label for="twitter_link"
+                                                        class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <input name="twitter_link" type="text" class="form-control" id="Twitter" value="<?=set_value('twitter_link',$row->twitter_link)?>">
-                                                    </div>
-
-                                                    <?php if(!empty($errors['twitter_link'])):?>
+                                                        <input name="twitter_link" type="text"
+                                                            class="form-control <?=!empty($errors['twitter_link']) ? 'border-danger':'';?>"
+                                                            id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
+                                                        <?php if(!empty($errors['twitter_link'])):?>
                                                         <small class="text-danger"><?=$errors['twitter_link']?></small>
-                                                    <?php endif;?>
-
+                                                        <?php endif;?>
+                                                    </div>
                                                 </div>
 
-
+                                                
                                                 <div class="row mb-3">
-                                                    <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
+                                                    <label for="facebook_link"
+                                                        class="col-md-4 col-lg-3 col-form-label">Facebook
+                                                        Profile</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <input name="facebook_link" type="text" class="form-control" id="Facebook" value="<?=set_value('facebook_link',$row->facebook_link)?>">
+                                                        <input name="facebook_link" type="text"
+                                                            class="form-control <?=!empty($errors['facebook_link']) ? 'border-danger':'';?>"
+                                                            id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>">
+                                                        <?php if(!empty($errors['facebook_link'])):?>
+                                                        <small
+                                                            class="text-danger"><?=$errors['facebook_link']?></small>
+                                                        <?php endif;?>
                                                     </div>
-
-                                                    <?php if(!empty($errors['facebook_link'])):?>
-                                                        <small class="text-danger"><?=$errors['facebook_link']?></small>
-                                                    <?php endif;?>
-
                                                 </div>
                                                 <div class="row mb-3">
                                                     <label for="instagram_link"
@@ -469,15 +473,18 @@ $this->view('admin/admin-header') ?>
                                                     </div>
                                                 </div>
 
-                                                <div class="js-prog progress my-4 hide">
-                                                  <div class="progress-bar " role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Saving.. 50%</div>
+                                                <div class="col-12 text-center ">
+                                                    <div class="js-prog progress my-4 hide">
+                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving.. 0%</div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="text-center">
-                                                  <a href="<?=ROOT?>/admin/profile">
-                                                    <button type="button" class="btn btn-primary">Back</button>
-                                                  </a>
-                                                  <button type="button" onclick="save_profile(event)" type="submit"  class="btn btn-danger">Save Changes</button>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <button  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
+                                                        <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
+                                                    </div>
+
                                                 </div>
                                             </form><!-- End Profile Edit Form -->
 
@@ -583,7 +590,7 @@ $this->view('admin/admin-header') ?>
             </main><!-- End #main -->
         </div>
         <!--end::Container-->
-    </div>  
+    </div>
     <!--end::Post-->
 </div>
 <!--end::Content-->
@@ -672,88 +679,55 @@ $this->view('admin/admin-header') ?>
     }
 
     //upload functions
-  function save_profile(event)
-  {
-
-    var form = event.currentTarget.form;
-    var inputs = form.querySelectorAll("input,textarea");
-    var obj = {};
-    var image_added = false;
-
-    for (var i = 0; i < inputs.length; i++) {
-      var key = inputs[i].name;
-
-      if(key == 'image'){
-        if(typeof inputs[i].files[0] == 'object'){
-          obj[key] = inputs[i].files[0];
-          image_added = true;
-        }
-      }else{
-        obj[key] = inputs[i].value;
-      }
+    function save_profile()
+    {
+        var image = document.querySelector(".js-profile-image-input");
+        send_data({
+            pic: image.files[0]
+        });
     }
- 
-    //validate image
-    if(image_added){
-
-      var allowed = ['jpg','jpeg','png'];
-      if(typeof obj.image == 'object'){
-        var ext = obj.image.name.split(".").pop();
-      }
-
-      if(!allowed.includes(ext.toLowerCase())){
-        alert("Only these file types are allowed in profile image: "+ allowed.toString(","));
-        return;
-      }
-    }
-
-    send_data(obj);
-
-  }
 
     function send_data(obj)
-  {
+    {
 
-    var prog = document.querySelector(".js-prog");
-    prog.children[0].style.width = "0%";
-    prog.classList.remove("hide");
+        var prog = document.querySelector(".js-prog");
+        prog.children[0].style.width = "0%";
+        prog.classList.remove("hide");
 
-    var myform = new FormData();
-    for(key in obj){
-      myform.append(key,obj[key]); 
-    }
-
-    var ajax = new XMLHttpRequest();
-
-    ajax.addEventListener('readystatechange',function(){
-
-      if(ajax.readyState == 4){
-
-        if(ajax.status == 200){
-          //everything went well
-          alert("upload complete");
-          //window.location.reload();
-          handle_result(ajax.responseText);
-        }else{
-          //error
-          alert("an error occurred");
+        var myform = new FormData();
+        for(key in obj){
+            myform.append(key,obj[key]);
         }
-      }
-    });
 
-    ajax.upload.addEventListener('progress',function(e){
+        var ajax = new XMLHttpRequest();
 
-      var percent = Math.round((e.loaded / e.total) * 100);
-      prog.children[0].style.width = percent + "%";
-      prog.children[0].innerHTML = "Saving.. " + percent + "%";
+        ajax.addEventListener('readystatechange',function(){
 
-    });
+            if(ajax.readyState == 4){
 
-    ajax.open('post','',true);
-    ajax.send(myform);
+                if(ajax.status == 200){
+                    //everything went well
+                    //alert("upload complete");
+                }else{
+                    //error
+                    alert("an error occurred");
+                }
+            }
+        });
 
-  }
+        ajax.upload.addEventListener('progress',function(e){
 
+            var percent = Math.round((e.loaded / e.total) * 100);
+            prog.children[0].style.width = percent + "%";
+            prog.children[0].innerHTML = "Saving.. " + percent + "%";
 
+        });
+
+        ajax.open('post','',true);
+        ajax.send(myform);
+
+    }
 </script>
+
+<p>Hello World</p>
 <?php $this->view('admin/admin-footer') ?>
