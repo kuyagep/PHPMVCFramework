@@ -290,7 +290,7 @@ $this->view('admin/admin-header') ?>
                                                             <?php if(!empty($errors['thumbnail'])):?>
                                                                 <small class="js-error-thumbnail text-danger"><?=$errors['thumbnail']?></small>
                                                             <?php endif;?>
-
+                                                            <small class="js-error-thumbnail text-danger"></small>
                                                             <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                                         </div>
                                                     </div>
@@ -303,10 +303,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="firstname" type="text"
                                                             class="form-control <?=!empty($errors['firstname']) ? 'border-danger':'';?>"
                                                             id="firstname"
-                                                            value="<?=set_value('firstname', esc($row->firstname))?>" required>
+                                                            value="<?=set_value('firstname', esc($row->firstname))?>" placeholder="Firstname" required>
                                                         <?php if(!empty($errors['firstname'])):?>
                                                         <small class="js-error-firstname text-danger"><?=$errors['firstname']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-firstname text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -317,10 +318,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="lastname" type="text"
                                                             class="form-control <?=!empty($errors['lastname']) ? 'border-danger':'';?>"
                                                             id="lastname"
-                                                            value="<?=set_value('lastname', esc($row->lastname))?>" required>
+                                                            value="<?=set_value('lastname', esc($row->lastname))?>" placeholder="Lastname" required>
                                                         <?php if(!empty($errors['lastname'])):?>
                                                         <small class="js-error-lastname text-danger"><?=$errors['lastname']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-lastname text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -328,13 +330,14 @@ $this->view('admin/admin-header') ?>
                                                     <label for="about"
                                                         class="col-md-4 col-lg-3 col-form-label">About</label>
                                                     <div class="col-md-8 col-lg-9">
-                                                        <textarea name="about"
+                                                        <textarea name="about" placeholder="About"
                                                             class="form-control <?=!empty($errors['about']) ? 'border-danger':'';?>"
                                                             id="about"
                                                             style="height: 100px"><?=set_value('about', esc($row->about))?></textarea>
                                                         <?php if(!empty($errors['about'])):?>
                                                         <small class="js-error-about text-danger"><?=$errors['about']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-about text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -345,10 +348,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="company" type="text"
                                                             class="form-control <?=!empty($errors['company']) ? 'border-danger':'';?>"
                                                             id="company"
-                                                            value="<?=set_value('company', esc($row->company))?>">
+                                                            value="<?=set_value('company', esc($row->company))?>" placeholder="Company">
                                                         <?php if(!empty($errors['company'])):?>
                                                         <small class="js-error-company text-danger"><?=$errors['company']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-company text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -358,10 +362,11 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="job" type="text"
                                                             class="form-control <?=!empty($errors['job']) ? 'border-danger':'';?>"
-                                                            id="job" value="<?=set_value('job', esc($row->job))?>">
+                                                            id="job" value="<?=set_value('job', esc($row->job))?>" placeholder="Job">
                                                         <?php if(!empty($errors['job'])):?>
                                                         <small class="js-error-job text-danger"><?=$errors['job']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-job text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -372,10 +377,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="country" type="text"
                                                             class="form-control <?=!empty($errors['country']) ? 'border-danger':'';?>"
                                                             id="country"
-                                                            value="<?=set_value('country', esc($row->country))?>">
+                                                            value="<?=set_value('country', esc($row->country))?>" placeholder="Country">
                                                         <?php if(!empty($errors['country'])):?>
                                                         <small class="js-error-country text-danger"><?=$errors['country']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-country text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -386,10 +392,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="address" type="text"
                                                             class="form-control <?=!empty($errors['address']) ? 'border-danger':'';?>"
                                                             id="address"
-                                                            value="<?=set_value('address', esc($row->address))?>">
+                                                            value="<?=set_value('address', esc($row->address))?>" placeholder="Address">
                                                         <?php if(!empty($errors['address'])):?>
                                                         <small class="js-error-address text-danger"><?=$errors['address']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-address text-danger"></small>
                                                     </div>
 
                                                 </div>
@@ -401,10 +408,11 @@ $this->view('admin/admin-header') ?>
                                                         <input name="phone" type="text"
                                                             class="form-control <?=!empty($errors['phone']) ? 'border-danger':'';?>"
                                                             id="phone"
-                                                            value="<?=set_value('phone', esc($row->phone))?>">
+                                                            value="<?=set_value('phone', esc($row->phone))?>" placeholder="09123456789">
                                                         <?php if(!empty($errors['phone'])):?>
                                                         <small class="js-error-phone text-danger"><?=$errors['phone']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-phone text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -414,10 +422,11 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="email" type="email"
                                                             class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>"
-                                                            id="email" value="<?=set_value('email', esc($row->email))?>" required>
+                                                            id="email" value="<?=set_value('email', esc($row->email))?>" placeholder="Email Address" required>
                                                         <?php if(!empty($errors['email'])):?>
                                                             <small class="js-error-email text-danger"><?=$errors['email']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-email text-danger"></small>
                                                     </div>
 
                                                 </div>
@@ -428,10 +437,11 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="twitter_link" type="text"
                                                             class="form-control <?=!empty($errors['twitter_link']) ? 'border-danger':'';?>"
-                                                            id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
+                                                            id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>" placeholder="Twitter">
                                                         <?php if(!empty($errors['twitter_link'])):?>
                                                         <small class="js-error-twitter_link text-danger"><?=$errors['twitter_link']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-twitter_link text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -443,11 +453,12 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="facebook_link" type="text"
                                                             class="form-control <?=!empty($errors['facebook_link']) ? 'border-danger':'';?>"
-                                                            id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>">
+                                                            id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>" placeholder="Facebook">
                                                         <?php if(!empty($errors['facebook_link'])):?>
                                                         <small
                                                             class="js-error-facebook_link text-danger"><?=$errors['facebook_link']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-facebook_link text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
@@ -457,11 +468,12 @@ $this->view('admin/admin-header') ?>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="instagram_link" type="text"
                                                             class="form-control <?=!empty($errors['instagram_link']) ? 'border-danger':'';?>"
-                                                            id="instagram_link" value="<?=set_value('instagram_link', esc($row->instagram_link))?>">
+                                                            id="instagram_link" value="<?=set_value('instagram_link', esc($row->instagram_link))?>" placeholder="Instagram">
                                                         <?php if(!empty($errors['instagram_link'])):?>
                                                         <small
                                                             class="js-error-instagram_link text-danger"><?=$errors['instagram_link']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-instagram_link text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -471,10 +483,11 @@ $this->view('admin/admin-header') ?>
                                                         Profile</label>
                                                     <div class="col-md-8 col-lg-9">
                                                         <input name="linkedin_link" type="text" class="form-control <?=!empty($errors['linkedin_link']) ? 'border-danger':'';?>"
-                                                            id="linkedin_link" value="<?=set_value('linkedin_link', esc($row->linkedin_link))?>"    >
+                                                            id="linkedin_link" value="<?=set_value('linkedin_link', esc($row->linkedin_link))?>"   placeholder="Linkedin" >
                                                         <?php if(!empty($errors['linkedin_link'])):?>
                                                         <small class="js-error-linkedin_link text-danger"><?=$errors['linkedin_link']?></small>
                                                         <?php endif;?>
+                                                        <small class="js-error-linkedin_link text-danger"></small>
                                                     </div>
                                                 </div>
 
@@ -779,13 +792,16 @@ $this->view('admin/admin-header') ?>
             }else{
                 //save complete
                 alert("Profile saved successfully!");
+                window.location.reload();
             }
         }else {
 
         }
     }
     function display_errors(errors) {
-
+        for(key in errors){
+            document.querySelector(".js-error-"+key).innerHTML = errors[key];
+        }
     }
 </script>
 

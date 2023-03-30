@@ -17,6 +17,18 @@ class Admin
         $this->view('admin/dashboard', $data);
     }
 
+    public function courses($id = null)
+    {
+        if(!Auth::logged_in())
+        {
+            message('Please login to view the admin section');
+            redirect('signin');
+        }
+        $id = $id ?? Auth::getId();
+        $data = [];
+        $this->view('admin/courses', $data);
+    }
+
     public function profile($id = null)
     {
         if(!Auth::logged_in())
