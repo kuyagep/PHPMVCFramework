@@ -81,6 +81,36 @@ ALTER TABLE `users`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
+-- Course Table
+CREATE TABLE `courses` (
+                           `id` int(11) NOT NULL AUTO_INCREMENT,
+                           `title` varchar(100) NOT NULL,
+                           `description` text NOT NULL,
+                           `user_id` int(11) NOT NULL,
+                           `category_id` int(11) NOT NULL,
+                           `sub_category_id` int(11) NOT NULL,
+                           `level_id` int(11) NOT NULL,
+                           `language_id` int(11) NOT NULL,
+                           `price_id` int(11) NOT NULL,
+                           `promo_link` varchar(1024) NOT NULL,
+                           `primary_subject` varchar(100) NOT NULL,
+                           `date` datetime NOT NULL,
+                           `tags` varchar(2048) NOT NULL,
+                           `congratulations_message` varchar(2048) NOT NULL,
+                           `welcome_message` varchar(2048) NOT NULL,
+                           `course_promo_video` varchar(1024) NOT NULL,
+                           `course_image` varchar(1024) NOT NULL,
+                           PRIMARY KEY (`id`),
+                           KEY `title` (`title`),
+                           KEY `user_id` (`user_id`),
+                           KEY `category_id` (`category_id`),
+                           KEY `sub_category_id` (`sub_category_id`),
+                           KEY `level_id` (`level_id`),
+                           KEY `language_id` (`language_id`),
+                           KEY `price_id` (`price_id`),
+                           KEY `primary_subject` (`primary_subject`),
+                           KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
