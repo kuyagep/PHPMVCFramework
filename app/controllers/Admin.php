@@ -29,7 +29,7 @@ class Admin
         $user = new User();
         $data['row'] = $row = $user->first(['id'=>$id]);
 
-        if($_SERVER['REQUEST_METHOD'] == "POST" && $row && false )
+        if($_SERVER['REQUEST_METHOD'] == "POST" && $row)
         {
 
             $folder = "uploads/images/";
@@ -66,9 +66,18 @@ class Admin
                 }
                 $user->update($id,$_POST);
 
-                message("Profile save successfully!");
-                redirect('admin/profile/'.$id);
+
+                //message("Profile save successfully!");
+                //redirect('admin/profile/'.$id);
             }
+            if (empty($user->errors)){
+                $arr['message'] = "Profile saved succesfully";
+            }else{
+                $arr['message'] = "Please correct this errors";
+                $arr['errors'] = $user->errors;
+            }
+            echo json_encode($arr);
+            die;
         }
         $data['title'] = "Profile";
         $data['errors'] = $user->errors;

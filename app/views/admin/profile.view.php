@@ -286,6 +286,11 @@ $this->view('admin/admin-header') ?>
                                                                 <i class="text-white bi bi-upload"></i>
                                                                 <input class="js-profile-image-input" onchange="load_image(this.files[0])" type="file" name="thumbnail" style="display: none;">
                                                             </label>
+
+                                                            <?php if(!empty($errors['thumbnail'])):?>
+                                                                <small class="js-error-thumbnail text-danger"><?=$errors['thumbnail']?></small>
+                                                            <?php endif;?>
+
                                                             <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                                         </div>
                                                     </div>
@@ -300,7 +305,7 @@ $this->view('admin/admin-header') ?>
                                                             id="firstname"
                                                             value="<?=set_value('firstname', esc($row->firstname))?>" required>
                                                         <?php if(!empty($errors['firstname'])):?>
-                                                        <small class="text-danger"><?=$errors['firstname']?></small>
+                                                        <small class="js-error-firstname text-danger"><?=$errors['firstname']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -314,7 +319,7 @@ $this->view('admin/admin-header') ?>
                                                             id="lastname"
                                                             value="<?=set_value('lastname', esc($row->lastname))?>" required>
                                                         <?php if(!empty($errors['lastname'])):?>
-                                                        <small class="text-danger"><?=$errors['lastname']?></small>
+                                                        <small class="js-error-lastname text-danger"><?=$errors['lastname']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -328,7 +333,7 @@ $this->view('admin/admin-header') ?>
                                                             id="about"
                                                             style="height: 100px"><?=set_value('about', esc($row->about))?></textarea>
                                                         <?php if(!empty($errors['about'])):?>
-                                                        <small class="text-danger"><?=$errors['about']?></small>
+                                                        <small class="js-error-about text-danger"><?=$errors['about']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -342,7 +347,7 @@ $this->view('admin/admin-header') ?>
                                                             id="company"
                                                             value="<?=set_value('company', esc($row->company))?>">
                                                         <?php if(!empty($errors['company'])):?>
-                                                        <small class="text-danger"><?=$errors['company']?></small>
+                                                        <small class="js-error-company text-danger"><?=$errors['company']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -355,7 +360,7 @@ $this->view('admin/admin-header') ?>
                                                             class="form-control <?=!empty($errors['job']) ? 'border-danger':'';?>"
                                                             id="job" value="<?=set_value('job', esc($row->job))?>">
                                                         <?php if(!empty($errors['job'])):?>
-                                                        <small class="text-danger"><?=$errors['job']?></small>
+                                                        <small class="js-error-job text-danger"><?=$errors['job']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -369,7 +374,7 @@ $this->view('admin/admin-header') ?>
                                                             id="country"
                                                             value="<?=set_value('country', esc($row->country))?>">
                                                         <?php if(!empty($errors['country'])):?>
-                                                        <small class="text-danger"><?=$errors['country']?></small>
+                                                        <small class="js-error-country text-danger"><?=$errors['country']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -383,7 +388,7 @@ $this->view('admin/admin-header') ?>
                                                             id="address"
                                                             value="<?=set_value('address', esc($row->address))?>">
                                                         <?php if(!empty($errors['address'])):?>
-                                                        <small class="text-danger"><?=$errors['address']?></small>
+                                                        <small class="js-error-address text-danger"><?=$errors['address']?></small>
                                                         <?php endif;?>
                                                     </div>
 
@@ -398,7 +403,7 @@ $this->view('admin/admin-header') ?>
                                                             id="phone"
                                                             value="<?=set_value('phone', esc($row->phone))?>">
                                                         <?php if(!empty($errors['phone'])):?>
-                                                        <small class="text-danger"><?=$errors['phone']?></small>
+                                                        <small class="js-error-phone text-danger"><?=$errors['phone']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -411,7 +416,7 @@ $this->view('admin/admin-header') ?>
                                                             class="form-control <?=!empty($errors['email']) ? 'border-danger':'';?>"
                                                             id="email" value="<?=set_value('email', esc($row->email))?>" required>
                                                         <?php if(!empty($errors['email'])):?>
-                                                            <small class="text-danger"><?=$errors['email']?></small>
+                                                            <small class="js-error-email text-danger"><?=$errors['email']?></small>
                                                         <?php endif;?>
                                                     </div>
 
@@ -425,7 +430,7 @@ $this->view('admin/admin-header') ?>
                                                             class="form-control <?=!empty($errors['twitter_link']) ? 'border-danger':'';?>"
                                                             id="twitter_link" value="<?=set_value('twitter_link', esc($row->twitter_link))?>">
                                                         <?php if(!empty($errors['twitter_link'])):?>
-                                                        <small class="text-danger"><?=$errors['twitter_link']?></small>
+                                                        <small class="js-error-twitter_link text-danger"><?=$errors['twitter_link']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -441,7 +446,7 @@ $this->view('admin/admin-header') ?>
                                                             id="facebook_link" value="<?=set_value('facebook_link', $row->facebook_link)?>">
                                                         <?php if(!empty($errors['facebook_link'])):?>
                                                         <small
-                                                            class="text-danger"><?=$errors['facebook_link']?></small>
+                                                            class="js-error-facebook_link text-danger"><?=$errors['facebook_link']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -455,7 +460,7 @@ $this->view('admin/admin-header') ?>
                                                             id="instagram_link" value="<?=set_value('instagram_link', esc($row->instagram_link))?>">
                                                         <?php if(!empty($errors['instagram_link'])):?>
                                                         <small
-                                                            class="text-danger"><?=$errors['instagram_link']?></small>
+                                                            class="js-error-instagram_link text-danger"><?=$errors['instagram_link']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -468,7 +473,7 @@ $this->view('admin/admin-header') ?>
                                                         <input name="linkedin_link" type="text" class="form-control <?=!empty($errors['linkedin_link']) ? 'border-danger':'';?>"
                                                             id="linkedin_link" value="<?=set_value('linkedin_link', esc($row->linkedin_link))?>"    >
                                                         <?php if(!empty($errors['linkedin_link'])):?>
-                                                        <small class="text-danger"><?=$errors['linkedin_link']?></small>
+                                                        <small class="js-error-linkedin_link text-danger"><?=$errors['linkedin_link']?></small>
                                                         <?php endif;?>
                                                     </div>
                                                 </div>
@@ -737,8 +742,9 @@ $this->view('admin/admin-header') ?>
 
                 if(ajax.status === 200){
                     //everything went well
-                    alert("upload complete");
-                    window.location.reload();
+                    //alert("upload complete");
+                    //window.location.reload();
+                    handle_result(ajax.responseText);
                 }else{
                     //error
                     alert("an error occurred");
@@ -758,6 +764,27 @@ $this->view('admin/admin-header') ?>
 
         ajax.open('post','',true);
         ajax.send(myform);
+
+    }
+
+    function handle_result(result){
+        var  obj = JSON.parse(result);
+        if (typeof obj == 'object'){
+            //object is created
+            if (typeof obj.errors == 'object'){
+                //we have errors
+                display_errors(obj.errors);
+                alert("Please correct the errors on the page");
+
+            }else{
+                //save complete
+                alert("Profile saved successfully!");
+            }
+        }else {
+
+        }
+    }
+    function display_errors(errors) {
 
     }
 </script>
