@@ -681,8 +681,11 @@ $this->view('admin/admin-header') ?>
     //upload functions
     function save_profile(e)
     {
-        // console.log(e.currentTarget);
-        // return;
+        var form = e.currentTarget.form;
+        var inputs = form.querySelectorAll("input");
+       console.log(inputs);
+
+        return;
         //collect image data
         var image = document.querySelector(".js-profile-image-input");
        // var firstname =
