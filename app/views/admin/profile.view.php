@@ -481,7 +481,7 @@ $this->view('admin/admin-header') ?>
 
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <button  onclick="save_profile()" type="submit" class="btn btn-info">Save Changes</button>
+                                                        <button type="button" onclick="save_profile(event)" type="submit" class="btn btn-info">Save Changes</button>
                                                         <a href="<?=ROOT?>/admin/profile"><button type="button" class="btn btn-danger mr-5  mr-3">Back</button></a>
                                                     </div>
 
@@ -679,18 +679,33 @@ $this->view('admin/admin-header') ?>
     }
 
     //upload functions
-    function save_profile()
+    function save_profile(e)
     {
+        // console.log(e.currentTarget);
+        // return;
+        //collect image data
         var image = document.querySelector(".js-profile-image-input");
+       // var firstname =
+
+        var allowed = ['jpg','jpeg','png'];
+
+        if(typeof image.files[0] == 'object'){
+            var ext = image.files[0].name.split(".").pop();
+        }
+
+        if(!allowed.includes(ext.toLowerCase())){
+            alert("Only this files are allowed in profile image: "+ allowed.toString(", "));
+            return;
+        }
         send_data({
             pic: image.files[0]
         });
     }
 
-    function send_data(obj)
+    function send_data(obj, progbar = 'js-prog')
     {
 
-        var prog = document.querySelector(".js-prog");
+        var prog = document.querySelector("."+progbar);
         prog.children[0].style.width = "0%";
         prog.classList.remove("hide");
 
@@ -707,7 +722,8 @@ $this->view('admin/admin-header') ?>
 
                 if(ajax.status === 200){
                     //everything went well
-                    //alert("upload complete");
+                    alert("upload complete");
+                    window.location.reload();
                 }else{
                     //error
                     alert("an error occurred");
@@ -722,6 +738,8 @@ $this->view('admin/admin-header') ?>
             prog.children[0].innerHTML = "Saving.. " + percent + "%";
 
         });
+
+
 
         ajax.open('post','',true);
         ajax.send(myform);
