@@ -3339,4 +3339,5 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+
 <?php $this->view('admin/admin-footer') ?>

@@ -31,32 +31,6 @@
 <!--end::Page-->
 </div>
 <!--end::Root-->
-<!--begin::Drawers-->
-<!--begin::Activities drawer-->
-
-<!--end::Activities drawer-->
-<!--begin::Chat drawer-->
-
-<!--end::Chat drawer-->
-<!--begin::Exolore drawer toggle-->
-
-<!--end::Exolore drawer toggle-->
-<!--begin::Exolore drawer-->
-
-<!--end::Exolore drawer-->
-<!--end::Drawers-->
-<!--begin::Modals-->
-<!--begin::Modal - Invite Friends-->
-
-<!--end::Modal - Invite Friend-->
-<!--begin::Modal - Create App-->
-
-<!--end::Modal - Create App-->
-<!--begin::Modal - Upgrade plan-->
-
-<!--end::Modal - Upgrade plan-->
-<!--end::Modals-->
-<!--begin::Scrolltop-->
 <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
     <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
     <span class="svg-icon">
@@ -75,21 +49,31 @@
 var hostUrl = "<?=ROOT?>/assets/";
 </script>
 <!--begin::Javascript-->
+<!--begin::Javascript-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
-<script src="<?=ROOT?>/assets/plugins/global/plugins.bundle.js"></script>
 <script src="<?=ROOT?>/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Vendors Javascript(used by this page)-->
-<script src="<?=ROOT?>/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <!--end::Page Vendors Javascript-->
 <!--begin::Page Custom Javascript(used by this page)-->
+<script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/table.js"></script>
+<script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
+<script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/add.js"></script>
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script src="<?=ROOT?>/assets/plugins/global/plugins.bundle.js"></script>
+<!--<script src="--><?//=ROOT?><!--/assets/js/scripts.bundle.js"></script>-->
+<!--end::Global Javascript Bundle-->
+<!--begin::Page Vendors Javascript(used by this page)-->
+<script src="<?=ROOT?>/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<!--begin::Page Vendors Javascript(used by this page)-->
+<script src="<?=ROOT?>/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+
+
 <script src="<?=ROOT?>/assets/js/custom/widgets.js"></script>
 <script src="<?=ROOT?>/assets/js/custom/apps/chat/chat.js"></script>
 <script src="<?=ROOT?>/assets/js/custom/modals/create-app.js"></script>
 <script src="<?=ROOT?>/assets/js/custom/modals/upgrade-plan.js"></script>
-<!--end::Page Custom Javascript-->
-<!--end::Javascript-->
+
 </body>
-<!--end::Body-->
 
 </html>
