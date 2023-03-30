@@ -682,27 +682,39 @@ $this->view('admin/admin-header') ?>
     function save_profile(e)
     {
         var form = e.currentTarget.form;
-        var inputs = form.querySelectorAll("input");
-       console.log(inputs);
+        var inputs = form.querySelectorAll("input,textarea");
+        var obj = {};
+        var image_added = false;
 
-        return;
-        //collect image data
-        var image = document.querySelector(".js-profile-image-input");
-       // var firstname =
+        for (var i = 0; i < inputs.length; i++) {
+            var key = inputs[i].name;
 
-        var allowed = ['jpg','jpeg','png'];
+            if(key == 'thumbnail'){
+                if(typeof inputs[i].files[0] == 'object') {
+                    obj[key] = inputs[i].files[0];
+                    image_added = true;
+                }
+            }else{
+                obj[key] = inputs[i].value;
+            }
 
-        if(typeof image.files[0] == 'object'){
-            var ext = image.files[0].name.split(".").pop();
         }
 
-        if(!allowed.includes(ext.toLowerCase())){
-            alert("Only this files are allowed in profile image: "+ allowed.toString(", "));
-            return;
+        //validate Image
+        if (image_added){
+
+             var allowed = ['jpg','jpeg','png'];
+
+            if(typeof obj.thumbnail == 'object'){
+                var ext = obj.thumbnail.name.split(".").pop();
+            }
+
+            if(!allowed.includes(ext.toLowerCase())){
+                alert("Only this files are allowed in profile image: "+ allowed.toString(", "));
+                return;
+            }
         }
-        send_data({
-            pic: image.files[0]
-        });
+        send_data(obj);
     }
 
     function send_data(obj, progbar = 'js-prog')
