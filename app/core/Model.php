@@ -14,13 +14,13 @@ Trait Model
 	protected string $order_column = "id";
 	public array $errors 		= [];
 
-	public function findAll()
-	{
-	 
-		$query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
-
-		return $this->query($query);
-	}
+//	public function findAll()
+//	{
+//
+//		$query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+//
+//		return $this->query($query);
+//	}
 
 	public function where($data, $data_not = [])
 	{
@@ -32,11 +32,23 @@ Trait Model
 		return $this->query($query, $data);
 	}
 
-	public function first($data, $data_not = [])
+    public function findAll($order = 'desc')
+	{
+        $query = "SELECT * FROM $this->table order by id $order ";
+
+        $result = $this->query($query);
+        if(is_array($result))
+        {
+            return $result;
+        }
+		return false;
+	}
+
+	public function first($data, $order = 'desc', $data_not = [])
 	{
         $query = $this->getStr($data, $data_not);
 
-        $query .= " limit $this->limit offset $this->offset";
+        $query .= " order by id $order limit 1";
 		$data = array_merge($data, $data_not);
 		
 		$result = $this->query($query, $data);
