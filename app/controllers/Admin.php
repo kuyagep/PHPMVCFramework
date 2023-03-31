@@ -17,7 +17,7 @@ class Admin
         $this->view('admin/dashboard', $data);
     }
 
-    public function courses($id = null)
+    public function courses($action = null, $id = null)
     {
         if(!Auth::logged_in())
         {
@@ -26,6 +26,11 @@ class Admin
         }
         $id = $id ?? Auth::getId();
         $data = [];
+
+        $data['action'] = $action;
+        $data['id'] = $id;
+
+        $data['title'] = "Courses";
         $this->view('admin/courses', $data);
     }
 
