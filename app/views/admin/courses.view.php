@@ -357,7 +357,7 @@
         <!--end::Toolbar-->
         <?php if(message()):?>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 m-10">
                     <div class="alert alert-success text-center"><?=message('',true)?></div>
                 </div>
             </div>
@@ -369,31 +369,50 @@
                     <div class="card shadow">
                         <div class="card-header card-header-stretch">
                             <h3 class="card-title">Edit Course</h3>
+
                         </div>
                         <div class="card-body">
                             <?php if (!empty($row)): ?>
-                            <h5 class="card-title">Default Tabs Justified</h5>
+                                <div class=" float-end">
+                                    <button class="btn btn-success">Save</button>
+                                    <a href="<?=ROOT?>/admin/courses">
+                                        <button class="btn btn-primary">Back</button>
+                                    </a>
+                                </div>
+                            <h4 class="card-title mb-3"><?=esc($row->title)?></h4>
                             <!-- Default Tabs -->
                             <ul class="nav nav-tabs nav-line-tabs d-flex" id="myTabjustified" role="tablist">
                                 <li class="nav-item flex-fill" role="presentation">
-                                    <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100 active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="false">Intended learners</button>
                                 </li>
                                 <li class="nav-item flex-fill" role="presentation">
-                                    <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-justified" type="button" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1">Profile</button>
+                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false" tabindex="-1">Curriculum</button>
                                 </li>
                                 <li class="nav-item flex-fill" role="presentation">
-                                    <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1">Contact</button>
+                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="landing-page-tab" data-bs-toggle="tab" data-bs-target="#landing-page" type="button" role="tab" aria-controls="landing-page" aria-selected="false" tabindex="-1">Course landing page</button>
+                                </li>
+                                <li class="nav-item flex-fill" role="presentation">
+                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false" tabindex="-1">Promotions</button>
+                                </li>
+                                <li class="nav-item flex-fill" role="presentation">
+                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false" tabindex="-1">Course messages</button>
                                 </li>
                             </ul>
                             <div class="tab-content pt-2" id="myTabjustifiedContent">
-                                <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
-                                    Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                                <div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="learners-justified">
+                                    1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
                                 </div>
-                                <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
-                                    Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                                <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum">
+                                    2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
                                 </div>
-                                <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
-                                    Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                                <div class="tab-pane fade" id="landing-page" role="tabpanel" aria-labelledby="landing-page">
+                                    3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                                </div>
+                                <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
+                                    4Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                                </div>
+                                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages">
+                                    5Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
                                 </div>
                             </div><!-- End Default Tabs -->
                             <?php else:?>
@@ -702,13 +721,13 @@
                                     </div>
                                 </th>
                                 <th class="min-w-25px">#</th>
-                                <th class="min-w-125px">Title</th>
-                                <th class="min-w-125px">Instructor</th>
-                                <th class="min-w-100px">Category</th>
-                                <th class="min-w-100px">Price</th>
+                                <th class="min-w-100px">Title</th>
+                                <th class="min-w-100px">Instructor</th>
+                                <th class="min-w-75px">Category</th>
+                                <th class="min-w-50px">Price</th>
                                 <th class="min-w-100px">Primary Subject</th>
-                                <th class="min-w-100px">Date</th>
-                                <th class="text-end min-w-100px">Action</th>
+                                <th class="min-w-25px">Date</th>
+                                <th class="text-end min-w-75px">Action</th>
                             </tr>
                             <!--end::Table row-->
                             </thead>
@@ -795,6 +814,29 @@
     </div>
     <!--end::Content-->
 <?php endif; ?>
+
+<script>
+    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
+
+    function show_tab(tab_name)
+    {
+        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
+        const tab = new bootstrap.Tab(someTabTriggerEl);
+
+        tab.show();
+
+    }
+
+    function set_tab(tab_name)
+    {
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+    }
+    window.onload = function(){
+
+        show_tab(tab);
+    }
+</script>
 
 <?php $this->view('admin/admin-footer'); ?>
 

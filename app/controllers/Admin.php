@@ -3,9 +3,9 @@
 /**
  * admin class
  */
-class Admin extends Controller
+class Admin
 {
-
+    use Controller;
     public function index()
     {
         if (!Auth::logged_in()){
