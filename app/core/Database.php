@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-class Database
+class  Database
 {
 	private string $host = DB_HOST;
 	private string $user = DB_USER;
@@ -54,7 +54,7 @@ class Database
     public function create_tables(){
         //user table
         $query = "
-        CREATE TABLE `users` (
+        CREATE TABLE IF NOT EXISTS `users` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
          `firstname` varchar(255) NOT NULL,
          `lastname` varchar(255) NOT NULL,
@@ -90,7 +90,7 @@ class Database
 
         //course table
         $query = "
-                    CREATE TABLE `courses` (
+                    CREATE TABLE IF NOT EXISTS `courses` (
          `id` int(11) NOT NULL AUTO_INCREMENT,
          `title` varchar(100) NOT NULL,
          `description` text DEFAULT NULL,
@@ -130,7 +130,7 @@ class Database
 
 
         $query = "
-            CREATE TABLE `categories` (
+            CREATE TABLE IF NOT EXISTS `categories` (
              `id` int(11) NOT NULL AUTO_INCREMENT,
              `category` varchar(30) NOT NULL,
              `disabled` tinyint(1) NOT NULL DEFAULT 0,
@@ -141,6 +141,28 @@ class Database
         ";
 
         $this->query($query);
+
+        $query = "
+            CREATE TABLE IF NOT EXISTS `prices` (
+             `id` int(11) NOT NULL AUTO_INCREMENT,
+             `name` varchar(50) NOT NULL,
+             `price` decimal(10,0) NOT NULL,
+             `disabled` tinyint(1) NOT NULL DEFAULT 0,
+             PRIMARY KEY (`id`),
+             KEY `price` (`price`),
+             KEY `disabled` (`disabled`),
+             KEY `name` (`name`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+        ";
+
+        $this->query($query);
+
+        $query = "
+            INSERT INTO `prices`(`id`, `name`, `price`, `disabled`) VALUES (1,'Free','0',0);
+        ";
+
+        $this->query($query);
+
     }
 	
 }

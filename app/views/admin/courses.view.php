@@ -163,10 +163,18 @@
                     <form method="post">
                         <div class="py-5">
                             <div class="rounded border-0 p-10">
+
                                 <div class="mb-10">
                                     <input name="title" type="text" class="form-control <?=!empty($errors['title']) ? 'border-danger':'';?>" value="<?= set_value('title')?>" placeholder="Course Title"/>
                                     <?php if(!empty($errors['title'])):?>
                                         <small class="text-danger"><?=$errors['title']?></small>
+                                    <?php endif;?>
+                                </div>
+
+                                <div class="mb-10">
+                                    <input name="primary_subject" type="text" class="form-control <?=!empty($errors['primary_subject']) ? 'border-danger':'';?>" value="<?= set_value('primary_subject')?>" placeholder="Primary Subject e.g Marketing"/>
+                                    <?php if(!empty($errors['primary_subject'])):?>
+                                        <small class="text-danger"><?=$errors['primary_subject']?></small>
                                     <?php endif;?>
                                 </div>
                                 <div class="mb-10">
@@ -196,15 +204,212 @@
 
 </div>
 <?php elseif($action == 'edit'): ?>
+
+
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Toolbar-->
+        <div class="toolbar" id="kt_toolbar">
+            <!--begin::Container-->
+            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                <!--begin::Page title-->
+                <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                    <!--begin::Title-->
+                    <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Users List</h1>
+                    <!--end::Title-->
+                    <!--begin::Separator-->
+                    <span class="h-20px border-gray-200 border-start mx-4"></span>
+                    <!--end::Separator-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">User Management</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">Users</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-dark">Users List</li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+                <!--begin::Actions-->
+                <div class="d-flex align-items-center py-1">
+                    <!--begin::Wrapper-->
+                    <div class="me-4">
+                        <!--begin::Menu-->
+                        <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                            <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
+                                    </svg>
+                                </span>
+                            <!--end::Svg Icon-->Filter</a>
+                        <!--begin::Menu 1-->
+                        <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_61484c5528c3d">
+                            <!--begin::Header-->
+                            <div class="px-7 py-5">
+                                <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Menu separator-->
+                            <div class="separator border-gray-200"></div>
+                            <!--end::Menu separator-->
+                            <!--begin::Form-->
+                            <div class="px-7 py-5">
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bold">Status:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_61484c5528c3d" data-allow-clear="true">
+                                            <option></option>
+                                            <option value="1">Approved</option>
+                                            <option value="2">Pending</option>
+                                            <option value="2">In Process</option>
+                                            <option value="2">Rejected</option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bold">Member Type:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Options-->
+                                    <div class="d-flex">
+                                        <!--begin::Options-->
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
+                                            <input class="form-check-input" type="checkbox" value="1" />
+                                            <span class="form-check-label">Author</span>
+                                        </label>
+                                        <!--end::Options-->
+                                        <!--begin::Options-->
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="2" checked="checked" />
+                                            <span class="form-check-label">Customer</span>
+                                        </label>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Options-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bold">Notifications:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Switch-->
+                                    <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
+                                        <label class="form-check-label">Enabled</label>
+                                    </div>
+                                    <!--end::Switch-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
+                                    <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Menu 1-->
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Wrapper-->
+                    <!--begin::Button-->
+                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app" id="kt_toolbar_primary_button">Create</a>
+                    <!--end::Button-->
+                </div>
+                <!--end::Actions-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Toolbar-->
+        <?php if(message()):?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success text-center"><?=message('',true)?></div>
+                </div>
+            </div>
+        <?php endif;?>
+        <!--begin::Post-->
         <div class="post d-flex flex-column-fluid" id="kt_post">
-            <?php if(message()):?>
-                <div class=""></div>
-                <div class="alert alert-success text-center"><?=message('',true)?></div>
-            <?php endif;?>
+            <div id="kt_content_container" class="container-xxl">
+                <div class="rounded border p-0">
+                    <div class="card shadow">
+                        <div class="card-header card-header-stretch">
+                            <h3 class="card-title">Edit Course</h3>
+                        </div>
+                        <div class="card-body">
+                            <?php if (!empty($row)): ?>
+                            <h5 class="card-title">Default Tabs Justified</h5>
+                            <!-- Default Tabs -->
+                            <ul class="nav nav-tabs nav-line-tabs d-flex" id="myTabjustified" role="tablist">
+                                <li class="nav-item flex-fill" role="presentation">
+                                    <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                                </li>
+                                <li class="nav-item flex-fill" role="presentation">
+                                    <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-justified" type="button" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1">Profile</button>
+                                </li>
+                                <li class="nav-item flex-fill" role="presentation">
+                                    <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1">Contact</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-2" id="myTabjustifiedContent">
+                                <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+                                    Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                                </div>
+                                <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
+                                    Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+                                </div>
+                                <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
+                                    Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                                </div>
+                            </div><!-- End Default Tabs -->
+                            <?php else:?>
+                                <div class="">
+                                    <p class="">That course not found!</p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
+
 
 <?php else: ?>
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -498,6 +703,7 @@
                                 </th>
                                 <th class="min-w-25px">#</th>
                                 <th class="min-w-125px">Title</th>
+                                <th class="min-w-125px">Instructor</th>
                                 <th class="min-w-100px">Category</th>
                                 <th class="min-w-100px">Price</th>
                                 <th class="min-w-100px">Primary Subject</th>
@@ -522,16 +728,18 @@
                                         </td>
                                         <!--end::Checkbox-->
                                         <!--begin::User=-->
-                                        <td><?=$count++?></td>
+                                        <td><?=esc($row->id)?></td>
                                         <!--end::User=-->
                                         <!--begin::Role=-->
                                         <td><?=esc($row->title)?></td>
+                                        <!--end::Role=--><!--begin::Role=-->
+                                        <td><?=esc($row->user_row->name ?? 'Unknown')?></td>
                                         <!--end::Role=-->
                                         <!--begin::Role=-->
-                                        <td><?=esc($row->category_row->category)?></td>
+                                        <td><?=esc($row->category_row->category ?? 'Unknown')?></td>
                                         <!--end::Role=-->
                                         <!--begin::Two step=-->
-                                        <td><?=esc($row->price_id)?></td>
+                                        <td><?=esc($row->price_row->name ?? 'Unknown')?></td>
                                         <!--end::Two step=-->
                                         <!--begin::Last login=-->
                                         <td><?=esc($row->primary_subject)?></td>
@@ -554,12 +762,12 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
+                                                    <a href="<?=ROOT?>/admin/courses/edit/<?=$row->id?>" class="menu-link px-3">Edit</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                                                    <a href="<?=ROOT?>/admin/courses/delete/<?=$row->id?>" class="menu-link px-3" >Delete</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>

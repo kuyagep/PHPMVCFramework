@@ -7,9 +7,6 @@
 
 class Course_model extends Model
 {
-
-
-
     protected string $table = 'courses'; //Table name
 
     protected $afterSelect = [
@@ -20,7 +17,7 @@ class Course_model extends Model
         'get_level',
         'get_language'
     ];
-    protected $beforeSelect = [];
+    protected $beforeUpdate = [];
 
     protected array $allowedColumns = array(
 
@@ -51,6 +48,11 @@ class Course_model extends Model
             $this->errors['title'] = "A Course title is required";
         } elseif (!preg_match("/^[a-zA-Z \-\_\&]+$/", trim($data['title']))) {
             $this->errors['title'] = "Course can only have letters, spaces and [-_&]";
+        }
+        if (empty($data['primary_subject'])) {
+            $this->errors['primary_subject'] = "Primary subject is required";
+        } elseif (!preg_match("/^[a-zA-Z \-\_\&]+$/", trim($data['primary_subject']))) {
+            $this->errors['primary_subject'] = "Course can only have letters, spaces and [-_&]";
         }
 
         if (empty($data['category_id'])) {
@@ -160,13 +162,20 @@ class Course_model extends Model
         return $rows;
     }
 
-    protected function get_user(){
+
+
+    protected function get_sub_category($rows)
+    {
+        return $rows;
+    }
+    protected function get_user($rows){
         $db = new Database();
         if (!empty($rows[0]->user_id)){
             foreach ($rows as $key => $row){
                 $query = "SELECT firstname, lastname, role FROM users where id = :id limit 1";
-                $user = $db->query($query,['id'=>$row->category_id]);
-                if (!empty($cat)){
+                $user = $db->query($query,['id'=>$row->user_id]);
+                if (!empty($user)){
+                    $user[0]->name = $user[0]->firstname ." ". $user[0]->lastname;
                     $rows[$key]->user_row = $user[0] ;
                 }
             }
@@ -174,5 +183,29 @@ class Course_model extends Model
 
         return $rows;
     }
+    protected function get_price($rows)
+    {
+        $db = new Database();
+        if (!empty($rows[0]->price_id)){
+            foreach ($rows as $key => $row){
+                $query = "SELECT * FROM prices where id = :id limit 1";
+                $price = $db->query($query,['id'=>$row->price_id]);
+                if (!empty($price)){
+                    $price[0]->name = $price[0]->name ." ($". $price[0]->price.')';
+                    $rows[$key]->price_row = $price[0] ;
+                }
+            }
+        }
+        return $rows;
+    }
+    protected function get_level($rows)
+    {
+        return $rows;
+    }
+    protected function get_language($rows)
+    {
+        return $rows;
+    }
+
 
 }

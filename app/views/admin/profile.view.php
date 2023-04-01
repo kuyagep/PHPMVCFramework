@@ -201,7 +201,7 @@ $this->view('admin/admin-header') ?>
                             <div class="card">
                                 <div class="card-body pt-3">
                                     <!-- Bordered Tabs -->
-                                    <ul class="nav nav-tabs nav-tabs-bordered">
+                                    <ul class="nav nav-tabs nav-line-tabs nav-tabs-bordered">
                                 <!--             tab_list       -->
                                         <li class="nav-item">
                                             <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>

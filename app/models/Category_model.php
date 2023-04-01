@@ -5,9 +5,9 @@
  * User class
  */
 
-class Category_model
+class Category_model extends Model
 {
-    use Model;
+
 
     protected string $table = 'categories'; //Table name
 

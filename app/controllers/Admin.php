@@ -48,6 +48,7 @@ class Admin extends Controller
 
                     $_POST['date'] = date("Y-m-d H:i:s");
                     $_POST['user_id'] = $user_id;
+                    $_POST['price_id'] = 1;
 
                     $course->insert($_POST);
 
@@ -65,12 +66,15 @@ class Admin extends Controller
             }
             $data['title'] = "Add Courses";
             $data['errors'] = $course->errors;
-        }else{
+        }elseif ($action == 'edit' ){
+            //get Course information
+            $data['row'] = $course->first(['user_id'=>$user_id, 'id'=>$id]);
+        }
+        else{
             //Courses view
             $data['rows'] = $course->where(['user_id'=>$user_id]);
             //#53
-//            show($data['rows']);
-//            die;
+           // show($data['rows']);die;
         }
 
         $this->view('admin/courses', $data);

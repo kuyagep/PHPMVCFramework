@@ -1,8 +1,9 @@
 <?php 
 
 /**
- * Main Model trait
+ * Main Model class
  */
+
 class Model extends Database
 {
 
@@ -28,17 +29,37 @@ class Model extends Database
         $query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
 		$data = array_merge($data, $data_not);
 
-		return $this->query($query, $data);
+        $res = $this->query($query, $data);
+
+
+        if(is_array($res)){
+
+            //run afterSelect functions
+            if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as $func){
+                    $res = $this->$func($res);
+                }
+            }
+            return $res;
+        }
+
+        return false;
 	}
 
     public function findAll($order = 'desc')
 	{
         $query = "SELECT * FROM $this->table order by id $order ";
 
-        $result = $this->query($query);
-        if(is_array($result))
+        $res = $this->query($query);
+        if(is_array($res))
         {
-            return $result;
+            //run afterSelect functions
+            if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as $func){
+                    $res = $this->$func($res);
+                }
+            }
+            return $res;
         }
 		return false;
 	}
@@ -49,11 +70,17 @@ class Model extends Database
 
         $query .= " order by id $order limit 1";
 		$data = array_merge($data, $data_not);
-		
-		$result = $this->query($query, $data);
 
-		if(is_array($result)) {
-            return $result[0];
+        $res = $this->query($query, $data);
+
+		if(is_array($res)) {
+            //run afterSelect functions
+            if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as $func){
+                    $res = $this->$func($res);
+                }
+            }
+            return $res[0];
         }
 		return false;
 	}

@@ -5,9 +5,9 @@
  * User class
  */
 
-class User
+class User extends Model
 {
-	use Model;
+//	use Model;
 
 	protected string $table = 'users'; //Table name
 
