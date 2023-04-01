@@ -1,6 +1,6 @@
 <?php 
 
-Trait Database
+class Database
 {
 	private string $host = DB_HOST;
 	private string $user = DB_USER;

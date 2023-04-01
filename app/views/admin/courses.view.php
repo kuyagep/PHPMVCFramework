@@ -174,7 +174,7 @@
                                         <option value="" selected="">Course Category...</option>
                                         <?php if(!empty($categories)):?>
                                             <?php foreach($categories as $cat):?>
-                                            <option value="<?=esc($cat->id)?>"><?=esc($cat->category)?></option>
+                                            <option <?=set_select('category_id',$cat->id)?> value="<?=esc($cat->id)?>"><?=esc($cat->category)?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
@@ -196,6 +196,15 @@
 
 </div>
 <?php elseif($action == 'edit'): ?>
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <?php if(message()):?>
+                <div class=""></div>
+                <div class="alert alert-success text-center"><?=message('',true)?></div>
+            <?php endif;?>
+        </div>
+
+    </div>
 
 <?php else: ?>
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -487,7 +496,7 @@
                                         <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-100px">#</th>
+                                <th class="min-w-25px">#</th>
                                 <th class="min-w-125px">Title</th>
                                 <th class="min-w-100px">Category</th>
                                 <th class="min-w-100px">Price</th>
@@ -499,82 +508,71 @@
                             </thead>
                             <!--end::Table head-->
                             <!--begin::Table body-->
-                            <tbody class="text-gray-600 fw-bold">
-                            <!--begin::Table row-->
-                            <tr>
-                                <!--begin::Checkbox-->
-                                <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" value="1" />
-                                    </div>
-                                </td>
-                                <!--end::Checkbox-->
-                                <!--begin::User=-->
-                                <td class="d-flex align-items-center">
-                                    <!--begin:: Avatar -->
-                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html">
-                                            <div class="symbol-label">
-                                                <img src="<?=ROOT?>/assets/media/avatars/150-1.jpg" alt="Emma Smith" class="w-100" />
+                            <?php if (!empty($rows)): ?>
+                                <tbody class="text-gray-600 fw-bold">
+                                <!--begin::Table row-->
+                                <?php  $count=1; ?>
+                                <?php foreach ($rows as $row): ?>
+                                    <tr>
+                                        <!--begin::Checkbox-->
+                                        <td>
+                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="checkbox" value="1" />
                                             </div>
-                                        </a>
-                                    </div>
-                                    <!--end::Avatar-->
-                                    <!--begin::User details-->
-                                    <div class="d-flex flex-column">
-                                        <a href="../../demo1/dist/apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
-                                        <span>e.smith@kpmg.com.au</span>
-                                    </div>
-                                    <!--begin::User details-->
-                                </td>
-                                <!--end::User=-->
-                                <!--begin::Role=-->
-                                <td>Administrator</td>
-                                <!--end::Role=-->
-                                <!--begin::Role=-->
-                                <td>Sample</td>
-                                <!--end::Role=-->
-                                <!--begin::Last login=-->
-                                <td>
-                                    <div class="badge badge-light fw-bolder">Yesterday</div>
-                                </td>
-                                <!--end::Last login=-->
-                                <!--begin::Two step=-->
-                                <td>Data</td>
-                                <!--end::Two step=-->
-                                <!--begin::Joined-->
-                                <td>24 Jun 2021, 10:30 am</td>
-                                <!--begin::Joined-->
-                                <!--begin::Action=-->
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                        <span class="svg-icon svg-icon-5 m-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
-                                                    </svg>
-                                                </span>
-                                        <!--end::Svg Icon--></a>
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </td>
-                                <!--end::Action=-->
-                            </tr>
-                            <!--end::Table row-->
+                                        </td>
+                                        <!--end::Checkbox-->
+                                        <!--begin::User=-->
+                                        <td><?=$count++?></td>
+                                        <!--end::User=-->
+                                        <!--begin::Role=-->
+                                        <td><?=esc($row->title)?></td>
+                                        <!--end::Role=-->
+                                        <!--begin::Role=-->
+                                        <td><?=esc($row->category_row->category)?></td>
+                                        <!--end::Role=-->
+                                        <!--begin::Two step=-->
+                                        <td><?=esc($row->price_id)?></td>
+                                        <!--end::Two step=-->
+                                        <!--begin::Last login=-->
+                                        <td><?=esc($row->primary_subject)?></td>
+                                        <!--end::Last login=-->
 
-                            </tbody>
+                                        <!--begin::Joined-->
+                                        <td> <div class="badge badge-light fw-bolder"><?=get_date($row->date)?></div></td>
+                                        <!--begin::Joined-->
+                                        <!--begin::Action=-->
+                                        <td class="text-end">
+                                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                <span class="svg-icon svg-icon-5 m-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                <!--end::Svg Icon--></a>
+                                            <!--begin::Menu-->
+                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <a href="../../demo1/dist/apps/user-management/users/view.html" class="menu-link px-3">Edit</a>
+                                                </div>
+                                                <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <a href="#" class="menu-link px-3" data-kt-users-table-filter="delete_row">Delete</a>
+                                                </div>
+                                                <!--end::Menu item-->
+                                            </div>
+                                            <!--end::Menu-->
+                                        </td>
+                                        <!--end::Action=-->
+                                    </tr>
+                                <?php endforeach; ?>
+                                <!--end::Table row-->
+                                </tbody>
+                            <?php else: ?>
+                                <tr><td colspan="8" class="text-center">No records found!</td></tr>
+                            <?php endif; ?>
                             <!--end::Table body-->
                         </table>
                         <!--end::Table-->

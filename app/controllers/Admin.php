@@ -3,9 +3,8 @@
 /**
  * admin class
  */
-class Admin
+class Admin extends Controller
 {
-    use Controller;
 
     public function index()
     {
@@ -25,6 +24,8 @@ class Admin
             redirect('signin');
         }
         $id = $id ?? Auth::getId();
+        $user_id = Auth::getId();
+        $course = new Course_model();
         $data = [];
 
         $data['action'] = $action;
@@ -35,7 +36,8 @@ class Admin
 
         if ($action == 'add'){
             $category = new Category_model();
-            $course = new Course_model();
+
+
 
             $data['categories'] = $category->findAll('asc');
 
@@ -43,7 +45,7 @@ class Admin
             {
                 if($course->validate($_POST))
                 {
-                    $user_id = Auth::getId();
+
                     $_POST['date'] = date("Y-m-d H:i:s");
                     $_POST['user_id'] = $user_id;
 
@@ -63,6 +65,12 @@ class Admin
             }
             $data['title'] = "Add Courses";
             $data['errors'] = $course->errors;
+        }else{
+            //Courses view
+            $data['rows'] = $course->where(['user_id'=>$user_id]);
+            //#53
+//            show($data['rows']);
+//            die;
         }
 
         $this->view('admin/courses', $data);

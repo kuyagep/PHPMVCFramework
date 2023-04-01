@@ -1,7 +1,7 @@
 <?php 
 
 
-Trait Controller
+class Controller
 {
 
 	public function view($view,$data = [])

@@ -3,9 +3,8 @@
 /**
  * Main Model trait
  */
-Trait Model
+class Model extends Database
 {
-	use Database;
 
 
     protected int $limit 		= 10;

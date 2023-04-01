@@ -5,11 +5,22 @@
  * Courses class
  */
 
-class Course_model
+class Course_model extends Model
 {
-    use Model;
+
+
 
     protected string $table = 'courses'; //Table name
+
+    protected $afterSelect = [
+        'get_category',
+        'get_sub_category',
+        'get_user',
+        'get_price',
+        'get_level',
+        'get_language'
+    ];
+    protected $beforeSelect = [];
 
     protected array $allowedColumns = array(
 
@@ -133,6 +144,35 @@ class Course_model
 
         }
         return $data;
+    }
+
+    protected function get_category($rows){
+        $db = new Database();
+        if (!empty($rows[0]->category_id)){
+            foreach ($rows as $key => $row){
+                $query = "SELECT * FROM categories where id = :id limit 1";
+                $cat = $db->query($query,['id'=>$row->category_id]);
+                if (!empty($cat)){
+                    $rows[$key]->category_row = $cat[0] ;
+                }
+            }
+        }
+        return $rows;
+    }
+
+    protected function get_user(){
+        $db = new Database();
+        if (!empty($rows[0]->user_id)){
+            foreach ($rows as $key => $row){
+                $query = "SELECT firstname, lastname, role FROM users where id = :id limit 1";
+                $user = $db->query($query,['id'=>$row->category_id]);
+                if (!empty($cat)){
+                    $rows[$key]->user_row = $user[0] ;
+                }
+            }
+        }
+
+        return $rows;
     }
 
 }
