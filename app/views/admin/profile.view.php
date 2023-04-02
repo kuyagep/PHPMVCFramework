@@ -204,7 +204,7 @@ $this->view('admin/admin-header') ?>
                                     <ul class="nav nav-tabs nav-line-tabs nav-tabs-bordered">
                                 <!--             tab_list       -->
                                         <li class="nav-item">
-                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>
+                                            <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>
                                         </li>
 
                                         <li class="nav-item">
@@ -222,7 +222,7 @@ $this->view('admin/admin-header') ?>
                                     </ul>
                                     <div class="tab-content pt-2">
 
-                                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                        <div class="tab-pane fade profile-overview" id="profile-overview">
                                             <h5 class="card-title">About</h5>
                                             <p class="small fst-italic"><?=esc($row->about)?></p>
 
@@ -772,8 +772,6 @@ $this->view('admin/admin-header') ?>
             prog.children[0].innerHTML = "Saving.. " + percent + "%";
 
         });
-
-
 
         ajax.open('post','',true);
         ajax.send(myform);

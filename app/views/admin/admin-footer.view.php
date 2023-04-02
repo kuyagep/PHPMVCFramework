@@ -57,8 +57,8 @@ var hostUrl = "<?=ROOT?>/assets/";
 <!--end::Page Vendors Javascript-->
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/table.js"></script>
-<script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/export-users.js"></script>
-<script src="<?=ROOT?>/assets/js/custom/apps/user-management/users/list/add.js"></script>
+<!--<script src="--><?//=ROOT?><!--/assets/js/custom/apps/user-management/users/list/export-users.js"></script>-->
+<!--<script src="--><?//=ROOT?><!--/assets/js/custom/apps/user-management/users/list/add.js"></script>-->
 <!--begin::Global Javascript Bundle(used by all pages)-->
 <script src="<?=ROOT?>/assets/plugins/global/plugins.bundle.js"></script>
 <!--<script src="--><?//=ROOT?><!--/assets/js/scripts.bundle.js"></script>-->

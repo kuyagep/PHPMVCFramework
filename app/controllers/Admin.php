@@ -69,6 +69,17 @@ class Admin
         }elseif ($action == 'edit' ){
             //get Course information
             $data['row'] = $course->first(['user_id'=>$user_id, 'id'=>$id]);
+
+            if($_SERVER['REQUEST_METHOD'] == "POST") {
+                if(!empty($_POST['tab_type']) && $_POST['tab_type'] == "read"){
+                    if($_POST['tab_name'] == "landing-page"){
+                        echo "Hello World";
+                    }
+                }
+                die;
+            }
+
+
         }
         else{
             //Courses view

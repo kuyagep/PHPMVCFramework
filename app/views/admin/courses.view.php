@@ -1,5 +1,40 @@
 <?php $this->view('admin/admin-header'); ?>
 
+<style>
+    .tab-holder{
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        justify-content: center;
+        text-align: center;
+    }
+    .my-tab{
+        flex:1;
+        border-bottom: solid 1px #cccccc;
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+    .my-tab:hover{
+        color: #4154f1;
+    }
+    .active-tab{
+        color: #4154f1;
+        border-bottom: solid 1px #4154f1;
+    }
+    .hide{
+        display: none;
+    }
+
+    .loader{
+        position: relative;
+        width: 200px;
+        height: 200px;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+        opacity: 0.6;
+    }
+</style>
 <?php if($action == 'add'): ?>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Toolbar-->
@@ -374,47 +409,28 @@
                         <div class="card-body">
                             <?php if (!empty($row)): ?>
                                 <div class=" float-end">
-                                    <button class="btn btn-success">Save</button>
+                                    <button class="js-save-button btn btn-success disabled">Save</button>
                                     <a href="<?=ROOT?>/admin/courses">
                                         <button class="btn btn-primary">Back</button>
                                     </a>
                                 </div>
                             <h4 class="card-title mb-3"><?=esc($row->title)?></h4>
-                            <!-- Default Tabs -->
-                            <ul class="nav nav-tabs nav-line-tabs d-flex" id="myTabjustified" role="tablist">
-                                <li class="nav-item flex-fill" role="presentation">
-                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100 active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="false">Intended learners</button>
-                                </li>
-                                <li class="nav-item flex-fill" role="presentation">
-                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false" tabindex="-1">Curriculum</button>
-                                </li>
-                                <li class="nav-item flex-fill" role="presentation">
-                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="landing-page-tab" data-bs-toggle="tab" data-bs-target="#landing-page" type="button" role="tab" aria-controls="landing-page" aria-selected="false" tabindex="-1">Course landing page</button>
-                                </li>
-                                <li class="nav-item flex-fill" role="presentation">
-                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false" tabindex="-1">Promotions</button>
-                                </li>
-                                <li class="nav-item flex-fill" role="presentation">
-                                    <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false" tabindex="-1">Course messages</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content pt-2" id="myTabjustifiedContent">
-                                <div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="learners-justified">
-                                    1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+                                <br>
+                                <div class="tab-holder">
+                                    <div onclick="set_tab(this.id,this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
+                                    <div onclick="set_tab(this.id,this)" id="curriculum" class="my-tab">Curriculum</div>
+                                    <div onclick="set_tab(this.id,this)" id="landing-page" class="my-tab">Course landing page</div>
+                                    <div onclick="set_tab(this.id,this)" id="promotions" class="my-tab">Promotions</div>
+                                    <div onclick="set_tab(this.id,this)" id="messages" class="my-tab">Course messages</div>
                                 </div>
-                                <div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum">
-                                    2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+
+                                <div oninput="something_changed(event)">
+                                    <div id="tabs-content">
+
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="landing-page" role="tabpanel" aria-labelledby="landing-page">
-                                    3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                                </div>
-                                <div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions">
-                                    4Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                                </div>
-                                <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages">
-                                    5Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
-                                </div>
-                            </div><!-- End Default Tabs -->
+
+
                             <?php else:?>
                                 <div class="">
                                     <p class="">That course not found!</p>
@@ -816,22 +832,110 @@
 <?php endif; ?>
 
 <script>
-    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#intended-learners";
-
+    var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "intended-learners";
+    var dirty = false;
     function show_tab(tab_name)
     {
-        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
-        const tab = new bootstrap.Tab(someTabTriggerEl);
+        var contentDiv = document.querySelector("#tabs-content");
+        show_loader(contentDiv);
+        //change active tab
+        var div = document.querySelector("#"+tab_name);
+        var children = div.parentNode.children;
+        for (let i = 0; i < children.length; i++) {
+            children[i].classList.remove("active-tab")
+        }
+        div.classList.add("active-tab");
 
-        tab.show();
+       var data = {};
+       data.tab_name = tab;
+       data.tab_type = "read";
+        send_data(data);
 
+
+
+        disable_save_button(false);
+
+    }
+
+    function send_data(obj)
+    {
+
+        var myform = new FormData();
+        for(key in obj){
+            myform.append(key,obj[key]);
+        }
+
+        var ajax = new XMLHttpRequest();
+
+        ajax.addEventListener('readystatechange',function(){
+
+            if(ajax.readyState === 4){
+
+                if(ajax.status === 200){
+                    //everything went well
+                    //alert("upload complete");
+                    //window.location.reload();
+                    handle_result(ajax.responseText);
+                }else{
+                    //error
+                    alert("an error occurred");
+                }
+            }
+        });
+
+
+        ajax.open('post','',true);
+        ajax.send(myform);
+
+    }
+    function handle_result(result){
+        var contentDiv = document.querySelector("#tabs-content");
+        var content = tab + "<input />";
+        contentDiv.innerHTML = result;
     }
 
     function set_tab(tab_name)
     {
+
+        // return;
         tab = tab_name;
         sessionStorage.setItem("tab", tab_name);
+
+        if(dirty){
+            if (!confirm("Your changes where not saved. Continue?")){
+                return;
+
+            }
+        }
+
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+        dirty = false;
+        show_tab(tab_name);
+
+
     }
+
+    function something_changed(e){
+        dirty = tab;
+        disable_save_button(true);
+    }
+
+    function disable_save_button(status = false){
+            if (status){
+                document.querySelector(".js-save-button").classList.remove("disabled");
+            }else{
+                document.querySelector(".js-save-button").classList.add("disabled");
+            }
+    }
+    function show_loader(item){
+        item.innerHTML = '<img src="<?=ROOT?>/assets/images/loader.gif" class="loader" alt="">';
+    }
+
+    function hide_loader(){
+
+    }
+
     window.onload = function(){
 
         show_tab(tab);
