@@ -73,7 +73,9 @@ class Admin
             if($_SERVER['REQUEST_METHOD'] == "POST") {
                 if(!empty($_POST['tab_type']) && $_POST['tab_type'] == "read"){
                     if($_POST['tab_name'] == "landing-page"){
-                        echo "Hello World";
+
+                    include views_path("course-edit-tabs/course-landing-page");
+
                     }
                 }
                 die;

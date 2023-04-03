@@ -7,12 +7,15 @@
         margin-bottom: 10px;
         justify-content: center;
         text-align: center;
+        flex-wrap: wrap;
     }
     .my-tab{
         flex:1;
         border-bottom: solid 1px #cccccc;
+        padding-top: 10px;
         padding-bottom: 10px;
         cursor: pointer;
+        min-width: 150px;
     }
     .my-tab:hover{
         color: #4154f1;

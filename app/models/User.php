@@ -90,6 +90,8 @@ class User extends Model
         {
             if(!filter_var($data['twitter_link'],FILTER_VALIDATE_URL)){
                 $this->errors['twitter_link'] = "Twitter link is not valid";
+
+
             }
         }
         if(!empty($data['linkedin_link']))
