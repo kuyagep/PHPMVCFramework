@@ -83,7 +83,7 @@ class  Database
          PRIMARY KEY (`id`),
          KEY `role_id` (`role`),
          KEY `slug` (`slug`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8
+        ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
             
             ";
         $this->query($query);
@@ -122,7 +122,7 @@ class  Database
          KEY `date` (`date`),
          KEY `approved` (`approved`),
          KEY `published` (`published`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
             
             ";
 
@@ -137,7 +137,7 @@ class  Database
              PRIMARY KEY (`id`),
              KEY `category` (`category`),
              KEY `disabled` (`disabled`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+            ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
         ";
 
         $this->query($query);
@@ -152,7 +152,7 @@ class  Database
              KEY `price` (`price`),
              KEY `disabled` (`disabled`),
              KEY `name` (`name`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
         ";
 
         $this->query($query);
