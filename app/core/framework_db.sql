@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 05:17 PM
+-- Generation Time: Apr 03, 2023 at 03:55 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -57,12 +57,14 @@ INSERT INTO `categories` (`id`, `category`, `disabled`) VALUES
 CREATE TABLE `courses` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
+  `subtitle` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `sub_category_id` int(11) DEFAULT NULL,
   `level_id` int(11) DEFAULT NULL,
   `language_id` int(11) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
   `price_id` int(11) DEFAULT NULL,
   `promo_link` varchar(1024) DEFAULT NULL,
   `primary_subject` varchar(100) DEFAULT NULL,
@@ -80,11 +82,11 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `title`, `description`, `user_id`, `category_id`, `sub_category_id`, `level_id`, `language_id`, `price_id`, `promo_link`, `primary_subject`, `date`, `tags`, `congratulations_message`, `welcome_message`, `course_promo_video`, `course_image`, `approved`, `published`) VALUES
-(1, 'Web Development', NULL, 18, 15, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-31 15:39:16', NULL, NULL, NULL, '', '', 0, 0),
-(2, 'Sample Course ', NULL, 18, 16, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-31 15:40:55', NULL, NULL, NULL, '', '', 0, 0),
-(3, 'Free Course', NULL, 18, 15, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:33:41', NULL, NULL, NULL, '', '', 0, 0),
-(4, 'this is a test', NULL, 18, 18, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:35:40', NULL, NULL, NULL, '', '', 0, 0);
+INSERT INTO `courses` (`id`, `title`, `subtitle`, `description`, `user_id`, `category_id`, `sub_category_id`, `level_id`, `language_id`, `currency_id`, `price_id`, `promo_link`, `primary_subject`, `date`, `tags`, `congratulations_message`, `welcome_message`, `course_promo_video`, `course_image`, `approved`, `published`) VALUES
+(1, 'Web Development', '', NULL, 18, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-31 15:39:16', NULL, NULL, NULL, '', '', 0, 0),
+(2, 'Sample Course ', '', NULL, 18, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-31 15:40:55', NULL, NULL, NULL, '', '', 0, 0),
+(3, 'Free Course', '', NULL, 18, 15, NULL, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:33:41', NULL, NULL, NULL, '', '', 0, 0),
+(4, 'this is a test', '', NULL, 18, 18, NULL, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:35:40', NULL, NULL, NULL, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
