@@ -27,6 +27,10 @@ class Admin
         $user_id = Auth::getId();
         $course = new Course_model();
         $category = new Category_model();
+        $language = new Language_model();
+        $level = new Level_model();
+        $price = new Price_model();
+        $currency = new Currency_model();
         $data = [];
 
         $data['action'] = $action;
@@ -70,13 +74,19 @@ class Admin
         }elseif ($action == 'edit' ){
             //get Course information
             $categories = $category->findAll('asc');
+            $languages = $language->findAll('asc');
+            $levels = $level->findAll('asc');
+            $prices = $price->findAll('asc');
+            $currencies = $currency->findAll('asc');
+
             $data['row'] = $row = $course->first(['user_id'=>$user_id, 'id'=>$id]);
 
             if($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
                 if(!empty($_POST['tab_type']) && $_POST['tab_type'] == "read"){
                     if($_POST['tab_name'] == "landing-page"){
 
-                    include views_path("course-edit-tabs/course-landing-page");
+                        $data = file_get_contents(views_path("course-edit-tabs/landing-page"));
+                        echo $data;
 
                     }
                 }

@@ -26,13 +26,29 @@
                             <label for="language_id" class="form-label">Select Language</label>
                             <select class="form-select" name="language_id" id="language_id">
                                 <option value="">--Select--</option>
+                                <?php if(!empty($languages)):?>
+                                    <?php foreach($languages as $lang):?>
+                                        <option <?=set_select('language_id',$lang->id, $row->language_id)?> value="<?=esc($lang->id)?>"><?=esc($lang->language)?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
+                            <?php if(!empty($errors['language_id'])):?>
+                                <small class="text-danger"><?=$errors['language_id']?></small>
+                            <?php endif;?>
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="level_id" class="form-label">Select Level</label>
                             <select class="form-select" name="level_id" id="level_id">
                                 <option value="">--Select--</option>
+                                <?php if(!empty($levels)):?>
+                                    <?php foreach($levels as $level):?>
+                                        <option <?=set_select('level_id',$level->id, $row->level_id)?> value="<?=esc($level->id)?>"><?=esc($level->level)?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
+                            <?php if(!empty($errors['level_id'])):?>
+                                <small class="text-danger"><?=$errors['level_id']?></small>
+                            <?php endif;?>
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="category_id" class="form-label">Select Category</label>
@@ -58,12 +74,28 @@
                         <div class="col-md-4 my-3">
                             <select class="form-select" name="currency_id" id="currency_id">
                                 <option value="">--Select Currency--</option>
+                                <?php if(!empty($currencies)):?>
+                                    <?php foreach($currencies as $cur):?>
+                                        <option <?=set_select('currency_id',$cur->id, $row->currency_id)?> value="<?=esc($cur->id)?>"><?=esc($cur->currency ." ($cur->symbol)")?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
+                            <?php if(!empty($errors['currency_id'])):?>
+                                <small class="text-danger"><?=$errors['currency_id']?></small>
+                            <?php endif;?>
                         </div>
                         <div class="col-md-8 my-3">
                             <select class="form-select" name="price_id" id="select">
                                 <option value="">--Select Price--</option>
+                                <?php if(!empty($prices)):?>
+                                    <?php foreach($prices as $pric):?>
+                                        <option <?=set_select('price_id',$pric->id, $row->price_id)?> value="<?=esc($pric->id)?>"><?=esc($pric->name ." ($pric->price)")?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
+                            <?php if(!empty($errors['price_id'])):?>
+                                <small class="text-danger"><?=$errors['price_id']?></small>
+                            <?php endif;?>
                         </div>
                     </div>
 

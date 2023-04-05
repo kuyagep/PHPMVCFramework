@@ -412,7 +412,7 @@
                         <div class="card-body">
                             <?php if (!empty($row)): ?>
                                 <div class=" float-end">
-                                    <button class="js-save-button btn btn-success disabled">Save</button>
+                                    <button onclick="save_content()" class="js-save-button btn btn-success disabled">Save</button>
                                     <a href="<?=ROOT?>/admin/courses">
                                         <button class="btn btn-primary">Back</button>
                                     </a>
@@ -895,8 +895,8 @@
     }
     function handle_result(result){
         var contentDiv = document.querySelector("#tabs-content");
-        var content = tab + "<input />";
         contentDiv.innerHTML = result;
+
     }
 
     function set_tab(tab_name)
@@ -939,6 +939,22 @@
 
     function hide_loader(){
 
+    }
+    //for saving content
+    function save_content(){
+        var content = document.querySelector("#tabs-content");
+        var inputs = content.querySelectorAll("input,textarea,select");
+
+        console.log(inputs);
+
+        var obj = {};
+        obj.tab_name = tab;
+        obj.tab_type = "save";
+        for (var i = 0; i < inputs.length; i++) {
+            var key = inputs[i].name;
+            obj[key] = inputs[i].value;
+        }
+        send_data(obj);
     }
 
     window.onload = function(){
