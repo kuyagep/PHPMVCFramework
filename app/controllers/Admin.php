@@ -85,9 +85,18 @@ class Admin
                 if(!empty($_POST['tab_type']) && $_POST['tab_type'] == "read"){
                     if($_POST['tab_name'] == "landing-page"){
 
-                        $data = file_get_contents(views_path("course-edit-tabs/landing-page"));
-                        echo $data;
+                        $info['data'] = file_get_contents(ROOT."/ajax/course_edit".$id);
+                        $info['data_type'] = "read";
 
+                        echo json_encode($info);
+                    }
+                }elseif(!empty($_POST['tab_type']) && $_POST['tab_type'] == "save"){
+                    if($_POST['tab_name'] == "landing-page"){
+
+                        $info['data'] = "";
+                        $info['data_type'] = "save";
+
+                        echo json_encode($info);
                     }
                 }
                 die;

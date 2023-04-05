@@ -894,8 +894,16 @@
 
     }
     function handle_result(result){
-        var contentDiv = document.querySelector("#tabs-content");
-        contentDiv.innerHTML = result;
+        var obj  = JSON.parse(result);
+        if (typeof obj == 'object'){
+            if(obj.data_type == "read"){
+                var contentDiv = document.querySelector("#tabs-content");
+                contentDiv.innerHTML = obj.data;
+            }else if(obj.data_type == "save"){
+                alert("data saved")
+            }
+        }
+
 
     }
 
