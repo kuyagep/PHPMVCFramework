@@ -2,55 +2,65 @@
     <div class="col-md-6 mx-auto">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Vertical Form</h5>
+                <h5 class="card-title">Course landing page </h5>
 
                 <!-- Vertical Form -->
                 <form class="row g-3">
                     <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Course Title</label>
-                        <input type="text" class="form-control" id="inputNanme4" name="title">
+                        <label for="title" class="form-label">Course Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<?=$row->title?>" autofocus>
                     </div>
                     <div class="col-12">
-                        <label for="inputEmail4" class="form-label">Course Subtitle</label>
-                        <input type="email" class="form-control" id="inputEmail4" name="subtitle">
+                        <label for="subtitle" class="form-label">Course Subtitle</label>
+                        <input type="text" class="form-control" id="subtitle" name="subtitle" value="<?=$row->subtitle?>">
                     </div>
                     <div class="col-12">
                         <label for="description" class="form-label">Description</label>
-                        <textarea id="description" class="form-control" name="description" style="height: 100px"></textarea>
+                        <textarea id="description" class="form-control" name="description"  style="height: 100px">
+                            <?=$row->description?>
+                        </textarea>
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6 my-3">
-                            <label for="select" class="form-label">Select Language</label>
-                            <select class="form-select" name="language_id" id="select">
+                            <label for="language_id" class="form-label">Select Language</label>
+                            <select class="form-select" name="language_id" id="language_id">
                                 <option value="">--Select--</option>
                             </select>
                         </div>
                         <div class="col-md-6 my-3">
-                            <label for="select" class="form-label">Select Level</label>
-                            <select class="form-select" name="level_id" id="select">
+                            <label for="level_id" class="form-label">Select Level</label>
+                            <select class="form-select" name="level_id" id="level_id">
                                 <option value="">--Select--</option>
                             </select>
                         </div>
                         <div class="col-md-6 my-3">
-                            <label for="select" class="form-label">Select Category</label>
-                            <select class="form-select" name="category_id" id="select">
+                            <label for="category_id" class="form-label">Select Category</label>
+                            <select class="form-select" name="category_id" id="category_id">
+                                <option value="">--Select--</option>
+                                <?php if(!empty($categories)):?>
+                                    <?php foreach($categories as $cat):?>
+                                        <option <?=set_select('category_id',$cat->id, $row->category_id)?> value="<?=esc($cat->id)?>"><?=esc($cat->category)?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                            <?php if(!empty($errors['category_id'])):?>
+                                <small class="text-danger"><?=$errors['category_id']?></small>
+                            <?php endif;?>
+                        </div>
+                        <div class="col-md-6 my-3">
+                            <label for="sub_category_id" class="form-label">Select Subcategory</label>
+                            <select class="form-select" name="sub_category_id" id="sub_category_id">
                                 <option value="">--Select--</option>
                             </select>
                         </div>
-                        <div class="col-md-6 my-3">
-                            <label for="select" class="form-label">Select Subcategory</label>
-                            <select class="form-select" name="sub_category_id" id="select">
-                                <option value="">--Select--</option>
-                            </select>
-                        </div>
-                        <label for="select" class="form-label">Pricing:</label>
-                        <div class="col-md-6 my-3">
-                            <select class="form-select" name="currency_id" id="select">
+                        <label for="currency_id" class="form-label">Pricing:</label>
+                        <div class="col-md-4 my-3">
+                            <select class="form-select" name="currency_id" id="currency_id">
                                 <option value="">--Select Currency--</option>
                             </select>
                         </div>
-                        <div class="col-md-6 my-3">
+                        <div class="col-md-8 my-3">
                             <select class="form-select" name="price_id" id="select">
                                 <option value="">--Select Price--</option>
                             </select>
@@ -59,7 +69,7 @@
 
                     <div class="col-12 mb-3">
                         <label for="primary_subject" class="form-label">Primary Subject</label>
-                        <input type="text" class="form-control" id="primary_subject-subject" name="primary_subject" placeholder="">
+                        <input type="text" class="form-control" id="primary_subject" value="<?=$row->primary_subject?>" name="primary_subject" placeholder="">
                     </div>
                     
                     <div class="row mb-5">
@@ -78,7 +88,7 @@
 
                     <div class="row mb-5">
                         <div class="col-sm-4">
-                            <img src="<?=ROOT?>/assets/images/image-placeholder.jpg" alt="image placeholder" style="width: 100%;">
+                            <img src="<?=ROOT?>/assets/images/video-placeholder.jpg" alt="image placeholder" style="width: 100%;">
                         </div>
                         <div class="col-sm-8">
                             <h5>Course Video:</h5>

@@ -849,10 +849,12 @@
         }
         div.classList.add("active-tab");
 
-       var data = {};
-       data.tab_name = tab;
-       data.tab_type = "read";
-        send_data(data);
+
+        send_data({
+            tab_name: tab,
+            tab_type: "read"
+
+        });
 
 
 

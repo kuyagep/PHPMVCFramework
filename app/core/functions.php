@@ -150,3 +150,4 @@ function resize_image($filename,$max_size = 700)
 function views_path($path){
     return "../app/views/".$path.".view.php";
 }
+

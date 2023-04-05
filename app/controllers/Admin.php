@@ -26,6 +26,7 @@ class Admin
         $id = $id ?? Auth::getId();
         $user_id = Auth::getId();
         $course = new Course_model();
+        $category = new Category_model();
         $data = [];
 
         $data['action'] = $action;
@@ -35,7 +36,7 @@ class Admin
 
 
         if ($action == 'add'){
-            $category = new Category_model();
+
 
 
 
@@ -68,9 +69,10 @@ class Admin
             $data['errors'] = $course->errors;
         }elseif ($action == 'edit' ){
             //get Course information
-            $data['row'] = $course->first(['user_id'=>$user_id, 'id'=>$id]);
+            $categories = $category->findAll('asc');
+            $data['row'] = $row = $course->first(['user_id'=>$user_id, 'id'=>$id]);
 
-            if($_SERVER['REQUEST_METHOD'] == "POST") {
+            if($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
                 if(!empty($_POST['tab_type']) && $_POST['tab_type'] == "read"){
                     if($_POST['tab_name'] == "landing-page"){
 

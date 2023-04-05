@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2023 at 03:55 PM
+-- Generation Time: Apr 05, 2023 at 02:54 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -87,6 +87,68 @@ INSERT INTO `courses` (`id`, `title`, `subtitle`, `description`, `user_id`, `cat
 (2, 'Sample Course ', '', NULL, 18, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-03-31 15:40:55', NULL, NULL, NULL, '', '', 0, 0),
 (3, 'Free Course', '', NULL, 18, 15, NULL, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:33:41', NULL, NULL, NULL, '', '', 0, 0),
 (4, 'this is a test', '', NULL, 18, 18, NULL, NULL, NULL, NULL, 1, NULL, 'Web Development', '2023-04-01 16:35:40', NULL, NULL, NULL, '', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_levels`
+--
+
+CREATE TABLE `course_levels` (
+  `id` int(11) NOT NULL,
+  `level` varchar(30) NOT NULL,
+  `disabled` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `course_levels`
+--
+
+INSERT INTO `course_levels` (`id`, `level`, `disabled`) VALUES
+(1, 'Beginner Level', 0),
+(2, 'Intermediate Level', 0),
+(3, 'Expert Level', 0),
+(4, 'All Levels', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `currencies`
+--
+
+CREATE TABLE `currencies` (
+  `id` int(11) NOT NULL,
+  `currency` varchar(20) NOT NULL,
+  `symbol` varchar(4) NOT NULL,
+  `disabled` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `currencies`
+--
+
+INSERT INTO `currencies` (`id`, `currency`, `symbol`, `disabled`) VALUES
+(1, 'US Dollar', '$', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` int(11) NOT NULL,
+  `language` varchar(30) NOT NULL,
+  `symbol` varchar(11) NOT NULL,
+  `disabled` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `language`, `symbol`, `disabled`) VALUES
+(1, 'English', 'en_US', 0);
 
 -- --------------------------------------------------------
 
@@ -179,6 +241,27 @@ ALTER TABLE `courses`
   ADD KEY `published` (`published`);
 
 --
+-- Indexes for table `course_levels`
+--
+ALTER TABLE `course_levels`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `disabled` (`disabled`);
+
+--
+-- Indexes for table `currencies`
+--
+ALTER TABLE `currencies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `disabled` (`disabled`);
+
+--
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `disabled` (`disabled`);
+
+--
 -- Indexes for table `prices`
 --
 ALTER TABLE `prices`
@@ -210,6 +293,24 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `courses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `course_levels`
+--
+ALTER TABLE `course_levels`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `currencies`
+--
+ALTER TABLE `currencies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `prices`
