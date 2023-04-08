@@ -14,10 +14,9 @@ class Ajax
 //		$this->view('ajax', $data);
 	}
 
-public function course_edit($id = null)
+public function course_edit($user_id = null,$id = null)
 	{
-        $id = $id ?? Auth::getId();
-        $user_id = Auth::getId();
+
         $course = new Course_model();
         $category = new Category_model();
         $language = new Language_model();
@@ -25,6 +24,7 @@ public function course_edit($id = null)
         $price = new Price_model();
         $currency = new Currency_model();
         //get Course information
+        $data = [];
         $data['categories'] = $category->findAll('asc');
         $data['languages'] = $language->findAll('asc');
         $data['levels'] = $level->findAll('asc');

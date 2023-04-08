@@ -11,16 +11,19 @@
                     <div class="col-12">
                         <label for="title" class="form-label">Course Title</label>
                         <input type="text" class="form-control" id="title" name="title" value="<?=$row->title?>" autofocus>
+                        <small class="error text-danger error-title"></small>
                     </div>
                     <div class="col-12">
                         <label for="subtitle" class="form-label">Course Subtitle</label>
                         <input type="text" class="form-control" id="subtitle" name="subtitle" value="<?=$row->subtitle?>">
+                        <small class="error text-danger error-subtitle"></small>
                     </div>
                     <div class="col-12">
                         <label for="description" class="form-label">Description</label>
                         <textarea id="description" class="form-control" name="description"  style="height: 100px">
                             <?=$row->description?>
                         </textarea>
+                        <small class="error text-danger error-description"></small>
                     </div>
                     
                     <div class="row">
@@ -34,9 +37,7 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                            <?php if(!empty($errors['language_id'])):?>
-                                <small class="text-danger"><?=$errors['language_id']?></small>
-                            <?php endif;?>
+                            <small class="error text-danger error-language_id"></small>
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="level_id" class="form-label">Select Level</label>
@@ -48,9 +49,9 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                            <?php if(!empty($errors['level_id'])):?>
-                                <small class="text-danger"><?=$errors['level_id']?></small>
-                            <?php endif;?>
+
+                                <small class="error text-danger error-level_id"></small>
+
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="category_id" class="form-label">Select Category</label>
@@ -62,15 +63,14 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                            <?php if(!empty($errors['category_id'])):?>
-                                <small class="text-danger"><?=$errors['category_id']?></small>
-                            <?php endif;?>
+                            <small class="error text-danger error-category_id"></small>
                         </div>
                         <div class="col-md-6 my-3">
                             <label for="sub_category_id" class="form-label">Select Subcategory</label>
                             <select class="form-select" name="sub_category_id" id="sub_category_id">
                                 <option value="">--Select--</option>
                             </select>
+                            <small class="error text-danger error-sub_category_id"></small>
                         </div>
                         <label for="currency_id" class="form-label">Pricing:</label>
                         <div class="col-md-4 my-3">
@@ -82,9 +82,7 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                            <?php if(!empty($errors['currency_id'])):?>
-                                <small class="text-danger"><?=$errors['currency_id']?></small>
-                            <?php endif;?>
+                            <small class="error text-danger error-currency_id"></small>
                         </div>
                         <div class="col-md-8 my-3">
                             <select class="form-select" name="price_id" id="select">
@@ -95,9 +93,7 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                            <?php if(!empty($errors['price_id'])):?>
-                                <small class="text-danger"><?=$errors['price_id']?></small>
-                            <?php endif;?>
+                            <small class="error text-danger error-price_id"></small>
                         </div>
                     </div>
 
